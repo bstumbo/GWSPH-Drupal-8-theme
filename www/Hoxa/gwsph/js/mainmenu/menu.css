@@ -1,6 +1,6 @@
 ul.nav>li>a.active {
 	color:#fff;
-	background-color: #7ab700;
+	background-color: #0073AA;
 }
 
 ul.nav>li>a:hover .active {
@@ -322,7 +322,7 @@ margin-top: 104px;
     }
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #fff;
-        background-color: #7ab700;
+        background-color: #0073AA;
          padding: 10px 20px;
         border-bottom: 0px ;
        
@@ -540,7 +540,7 @@ li.dropdown ul.dropdown-menu .yamm-content li a:hover {color: #454545; }
     
 .yamm ul.nav li.dropdown:hover > a {
     color: #fff;
-	background-color: #7ab700;
+	background-color: #0073AA;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
     padding: 18px 15px;
