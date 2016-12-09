@@ -2000,7 +2000,8 @@ ul.fun_facts {
 	width: 100%;
 	padding: 70px 0px 40px 0px;
 	border-top: 5px solid #000;
-	background: url(../images/footer-bg.jpg) repeat left top;
+  color: #fff;
+	background: #033C5A;
 }
 .footer1 h4 {
 	color: #fff;
@@ -2041,7 +2042,7 @@ ul.faddress {
 	margin: 0px;
 }
 .faddress li a {
-	color: #727272;
+	color: #fff;
 }
 .faddress li a:hover {
 	color: #fff;
@@ -2288,10 +2289,11 @@ ul.faddress {
 	margin: 0px;
 }
 .qlinks li a {
-	color: #727272;
+	color: #fff;
 }
 .qlinks li a:hover {
-	color: #fff;
+	color: #008364;
+  text-decoration: underline;
 }
 .qlinks li a i {
 	margin-right: 3px;
@@ -2330,14 +2332,15 @@ ul.faddress {
 	width: 100%;
 }
 .siteinfo a {
-	color: #999;
+	color: #fff;
 	font-size: 13px;
 }
 .siteinfo a i {
 	margin-left: 4px;
 }
 .siteinfo a:hover {
-	color: #fff;
+	color: #008364;
+  text-decoration: underline;
 }
 
 /* copyrights */
