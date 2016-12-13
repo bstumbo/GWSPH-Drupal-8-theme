@@ -1431,13 +1431,13 @@ ul.fun_facts {
 }
 .features_sec42.two .box li a {
 	float: left;
-	color: #999;
+	color: #fff;
 	width: 27px;
 	height: 27px;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 27px;
-	background-color: #f7f7f7;
+	background-color: #008364;
 	border-radius: 100%;
 	margin-right: 5px;
 }
@@ -4319,7 +4319,8 @@ ul.post_meta_links_small {
 	line-height: 30px;
 }
 .sidebar_widget ul.arrows_list1 li a:hover {
-	color: #383634;
+	color: #008364;
+  text-decoration: underline;
 }
 .sidebar_widget ul.arrows_list1 i {
 	margin-right: 4px;
@@ -4356,10 +4357,11 @@ ul.recent_posts_list {
 	text-decoration: none;
 	line-height: 17px;
 	display: block;
-	color: #999;
+	color: #000;
 }
 .recent_posts_list li a:hover {
 	color: #0073AA;
+  text-decoration: underline;
 }
 
 .recent_posts_list li span {

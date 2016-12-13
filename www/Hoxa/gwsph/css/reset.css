@@ -30,7 +30,7 @@ body, input, textarea {
 	font-weight: normal;
 	font-style: normal;
 	line-height: 23px;
-	color: #727272;
+	color: #000;
 }
 
 /* Headings */
@@ -213,6 +213,7 @@ p {
 	font: 14px 'Open Sans', sans-serif;
 	font-weight: normal;
 	line-height: 23px;
+  margin-bottom: 1.25em;
 }
 
 ul, ol {
@@ -308,12 +309,12 @@ sub {
 
 /* Links */
 a {
-	color: #7ab700;
+	color: #0073AA;
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: none;
-	color: #272727;
+	text-decoration: underline;
+	color: #008364;
 }
 
 a.ltwo {

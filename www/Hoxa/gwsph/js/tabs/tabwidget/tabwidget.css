@@ -40,7 +40,7 @@ ul.tabs li a {
 		text-transform: uppercase;
 }
 ul.tabs li a:hover {
-		background: #454545;
+		background: #008364;
 		color:#fff;
 }
 
@@ -51,7 +51,7 @@ ul.tabs li.last {
 ul.tabs li.active, html ul.tabs li.active a,  html ul.tabs li.active a:hover  {
 		background: #fff;
 		color:#363333;
-		border-top: 1px solid #7ab700;
+		border-top: 1px solid #0073AA;
 }
 	
 .tab_container {
