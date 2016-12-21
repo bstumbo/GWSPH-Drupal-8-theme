@@ -1425,7 +1425,6 @@ ul.fun_facts {
 	margin: -10px 0px 0px 0px;
 }
 .features_sec42.two .box li {
-	float: left;
 	padding: 0px;
 	margin: 0px 0px;
 }
@@ -5609,4 +5608,18 @@ ul.recentnews {
 	float: left;
 	width: 100%;
 	padding: 30px 0px 58px 0px;
+}
+
+/* Custom GW Styles */
+
+ul.alpha li {
+  float: left;
+  padding: 10px;
+	margin: auto;
+}
+
+div.center {
+    margin: auto;
+    width: 75%;
+    
 }
