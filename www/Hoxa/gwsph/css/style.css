@@ -3327,11 +3327,11 @@ a.but_book:hover {
 a.but_download {
 	padding: 10px 22px 10px 22px;
 	margin: 0px 0px 0px 0px;
-	background: #ff8100;
+	background: #0073AA;
 	border-bottom: 1px solid #909090;
 }
 a.but_download:hover {
-	background-color: #ff9900;
+	background-color: #0073AA;
 }
 
 a.but_pdf {
@@ -3534,18 +3534,19 @@ ul.list_empty {
 .table-list {
 	float: left;
 	background-color: #fff;
-	border: 1px solid #dddddd;
+	border: 1px solid #000;
 	margin-bottom:20px;
 	width: 100%;
 }
 .table-list th {
-	padding: 18px 10px;
-	background-color: #eee;
+	color: #fff;
+  padding: 18px 10px;
+	background-color: #033C5A;
 }
 .table-list td {
 	padding: 13px 10px;
 	text-align: center;
-	background-color: #f5f5f5;
+	background-color: #fff;
 }
 .table-list tr:hover td {
 	background-color: #f9f9f9;
@@ -3881,10 +3882,10 @@ ul.list_empty {
 	text-align:center;
 }
 .framed-box-wrap {
-	background-color: #f9f9f9;
+	background-color: #fff;
 }
 .framed-box-wrap .pricing-title {
-	background-color: #f1f1f1;
+	background-color: #C9102F;
 	padding: 20px 0px 0px 0px;
 	text-align: center;
 	border-bottom: 1px solid #fff;
@@ -5273,21 +5274,50 @@ ul.clients_home {
 	text-align: center;
 	background: url(../images/parallax-bg.jpg) repeat-y center top;
 }
+
+.fusection5-noback {
+	float: left;
+	width: 100%;
+	padding: 70px 0px;
+	text-align: center;
+}
+
+
+.fusection5-noback img {
+	border: 7px solid #fff;
+}
 .fusection5 img {
 	border: 7px solid #fff;
 }
 
 .fusection5 a {
-	color: #272727;
+	color: #fff;
 	font-size: 14px;
 	font-weight: normal;
 	padding: 13px 30px;
 	border-radius: 4px;
-	background-color: #e3e3e3;
+	background-color: #0073AA;
 	-webkit-transition: background-color .3s, -webkit-transform .3s;
     transition: background-color .3s, transform .3s;
 }
+
+.fusection5-noback a {
+	color: #fff;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 13px 30px;
+	border-radius: 4px;
+	background-color: #0073AA;
+	-webkit-transition: background-color .3s, -webkit-transform .3s;
+    transition: background-color .3s, transform .3s;
+}
+
 .fusection5 a:hover {
+	color: #fff;
+	background-color: #0073AA;
+}
+
+.fusection5-noback a:hover {
 	color: #fff;
 	background-color: #0073AA;
 }
@@ -5622,4 +5652,8 @@ div.center {
     margin: auto;
     width: 75%;
     
+}
+
+h4.teaser {
+  color: #fff;
 }
