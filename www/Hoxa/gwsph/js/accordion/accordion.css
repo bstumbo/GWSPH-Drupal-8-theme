@@ -10,4 +10,4 @@
 .acc-trigger.active { cursor: default; background:#fff;}
 .acc-trigger.active:last-of-type { border-bottom: none; margin-bottom: 0; }
 .acc-trigger.active a { background-position: 14px -58px; cursor: default;	}
-.acc-container .content {  padding: 0px 14px 15px 44px; color: #999;  margin-bottom: 4px; background-color: #fff; border: 1px solid #e3e3e3; border-top: 0px solid #e3e3e3;  }
+.acc-container .content {  padding: 0px 14px 15px 44px; color: #000;  margin-bottom: 4px; background-color: #fff; border: 1px solid #e3e3e3; border-top: 0px solid #e3e3e3;  }

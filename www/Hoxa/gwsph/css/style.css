@@ -407,10 +407,21 @@
 
 /* features section 5 */
 .feature_section5 {
-	float: left;
+	color: #fff;
+  float: left;
 	width: 100%;
 	padding: 65px 0px;
-	background-color: #eee;
+	background-color: rgba(3, 60, 90, .7);
+}
+
+.feature_section5 a {
+	color: #fff;
+
+}
+
+.feature_section5 a:hover {
+	color: #78BE20;
+
 }
 
 /* features section 6 */
