@@ -85,6 +85,9 @@ function omega_page_attachments_alter (&$attachments) {
     }
     
     $attachments['#attached']['drupalSettings']['omega']['activeTheme'] = $theme;
+  } else {
+   $attachments['#attached']['drupalSettings']['omega_breakpoints'] = array();
+    $attachments['#attached']['drupalSettings']['omega']['activeLayout'] = '';
   }
   
   // Functionality to attach selected css/js from omega theme settings
