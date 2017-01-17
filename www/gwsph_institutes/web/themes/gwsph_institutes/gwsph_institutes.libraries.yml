@@ -11,10 +11,23 @@ gwsph_institutes:
     # Custom Javascript file for your own JS modifications.
     # Examples of behaviors in JS file.
     js/gwsph_institutes.js: {}
-    
+    ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.js: {}
+    ../../../../Hoxa/gwsph/js/mainmenu/sticky.js: {}
+    ../../../../Hoxa/gwsph/js/mainmenu/modernizr.custom.75180.js: {}
+    ../../../../Hoxa/gwsph/js/accordion/custom.js: {}
+    ../../../../Hoxa/gwsph/js/scrolltotop/totop.js: {}
+    ../../../../Hoxa/gwsph/js/animations/js/animations.min.js: {}
   css:
     theme:
       # Custom CSS file to be loaded in all media circumstances
+      ../../../../Hoxa/gwsph/css/style.css: {}
+      ../../../../Hoxa/gwsph/css/responsive-leyouts.css: {}
+      ../../../../Hoxa/gwsph/css/reset.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/sticky.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/menu.css: {}
+      ../../../../Hoxa/gwsph/js/tabs/assets/css/responsive-tabs3.css: {}
+      ../../../../Hoxa/gwsph/js/accordion/accordion.css: {}
+      ../../../../Hoxa/gwsph/css/font-awesome/css/font-awesome.min.css: {}
       style/css/gwsph_institutes.css: {}
   dependencies:
 #     - core/modernizr
