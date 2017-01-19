@@ -54,7 +54,12 @@
             {# Menu. #}
             {% block content %}
             {{ content }}
-            {% endblock %}
+          {% endblock %}
+           <div id="wrap">
+            <form action="index.html" autocomplete="on">
+            <input id="search" name="search" type="text" placeholder=""><input id="search_submit" value="search" type="submit">
+            </form>
+          </div>
           </div>
         </div>
       </div>

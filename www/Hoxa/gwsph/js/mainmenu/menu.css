@@ -538,7 +538,7 @@ li.dropdown ul.dropdown-menu .yamm-content li a:hover {color: #454545; }
 }
     
     
-.yamm ul.nav li.dropdown:hover > a {
+.yamm ul.nav li:hover > a {
     color: #fff;
 	background-color: #0073AA;
 }
@@ -556,7 +556,7 @@ float: right;
 	color: #fff;
 	font-size: 21px;
 }
-.yamm ul.nav li.dropdown:hover  b{
+.yamm ul.nav li:hover  b{
       border-top-color: #fff;
     border-bottom-color: #fff;
 }
@@ -634,4 +634,34 @@ border-bottom-color: #fff;
 
 .container>.navbar-collapse li a {margin-left: 14px; background-color: #272727;}
 
+}
+
+/* GWSPH Custom Menu Styles */
+
+.navbar-header {
+  width: 100%;
+}
+
+ul.navbar-nav {
+  height: inherit;
+}
+
+.navbar-nav>li {
+  height: inherit;
+}
+
+.navbar-default .navbar-nav>li>a {
+  height: inherit;
+}
+
+.menu_main > .container {
+  height: inherit;
+}
+
+.navbar-default {
+  height: inherit;
+}
+
+.navbar-default > .container {
+  height: inherit;
 }

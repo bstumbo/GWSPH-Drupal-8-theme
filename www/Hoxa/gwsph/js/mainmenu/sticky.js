@@ -3,7 +3,7 @@
 
     jQuery(function(t) {
         var n, e, i, o, r, s, a, u, l, h, c, p, d, f, g, m, v, y, $, w, C, x, k, b, T, I, H, M, P, S, z, O, q, A, F, L, B, D, N, V, E, K, _;
-        return K = t(window), z = t(document), window.App = {}, n = t("body, html"), o = t("#header"), s = t("#headerPush"), i = t("#footer"), O = "easeInOutExpo", k = "/wp-content/themes/KIND", b = 39, C = 37, P = 38, v = 40, y = 27, N = navigator.userAgent, q = N.match(/(Android|iPhone|BlackBerry|Opera Mini)/i), A = N.match(/(iPad|Kindle)/i), E = function() {
+        return K = t(window), z = t(document), window.App = {}, n = t("body, html"), o = t("#header-outer-wrapper"), s = t("#headerPush"), i = t("#footer"), O = "easeInOutExpo", k = "/wp-content/themes/KIND", b = 39, C = 37, P = 38, v = 40, y = 27, N = navigator.userAgent, q = N.match(/(Android|iPhone|BlackBerry|Opera Mini)/i), A = N.match(/(iPad|Kindle)/i), E = function() {
             return window.innerHeight || K.height()
         }, _ = function() {
             return window.innerWidth || K.width()

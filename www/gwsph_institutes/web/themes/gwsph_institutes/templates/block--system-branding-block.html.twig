@@ -21,9 +21,9 @@
     <div class="container">
     {% if site_logo %}
       <div class="logo">
-        <a href="{{ url('<front>') }}" title="{{ 'Home'|t }}" rel="home" id="logo" class="site-logo">
-          <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
-        </a>
+        <a href="{{ url('<front>') }}" title="{{ 'Home'|t }}" rel="home" >
+          <img class="site-logo" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+       </a>
       </div>
     {% endif %}
     

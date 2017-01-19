@@ -128,10 +128,8 @@
 	display:block;
 	width:100%;
 	min-height: 45px;
-	margin-top:9px;
 	position: relative;
 	text-indent:-999em;
-	background:url(../images/white_logo.png) no-repeat left bottom;
 }
 
 /* top navigation */
@@ -5668,4 +5666,10 @@ div.center {
 
 h4.teaser {
   color: #fff;
+}
+
+/* Custom Admin Styles */
+
+body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-oriented .toolbar-tray {
+  z-index: 10000;
 }

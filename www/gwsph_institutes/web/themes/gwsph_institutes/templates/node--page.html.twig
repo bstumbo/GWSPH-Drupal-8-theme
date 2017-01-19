@@ -1,0 +1,39 @@
+
+<article{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes }}>
+    <div class="page_title2">
+      <div class="container">
+          <div class="title"><h1>{{ label }}</h1></div>
+          <div class="pagenation">&nbsp;<a href="index.html">Home</a> <i>/</i> <a href="#">Pages</a> <i>/</i> Left Sidebar</div>
+      </div>
+    </div><!-- end page title --> 
+    <div class="clearfix"></div>
+    <div class="container">  
+   
+     <!--content right side begins--> 
+      <div class="content_right">
+        <img style="width: 100%;" src="{{ file_url(content.field_basic_image['#items'].entity.uri.value) }}">
+          <h3><strong>{{ content.field_sub_header }} </strong></h3>
+            {{ content.body }}              
+      </div><!-- end content right side -->
+    </div><!-- end content area -->
+  </div>
+</article>

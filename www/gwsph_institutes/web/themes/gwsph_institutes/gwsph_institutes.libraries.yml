@@ -25,6 +25,7 @@ gwsph_institutes:
       ../../../../Hoxa/gwsph/css/reset.css: {}
       ../../../../Hoxa/gwsph/js/mainmenu/sticky.css: {}
       ../../../../Hoxa/gwsph/js/mainmenu/menu.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.css: {}
       ../../../../Hoxa/gwsph/js/tabs/assets/css/responsive-tabs3.css: {}
       ../../../../Hoxa/gwsph/js/accordion/accordion.css: {}
       ../../../../Hoxa/gwsph/css/font-awesome/css/font-awesome.min.css: {}
