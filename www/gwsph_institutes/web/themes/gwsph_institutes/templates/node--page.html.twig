@@ -1,4 +1,3 @@
-
 <article{{ attributes }}>
   {{ title_prefix }}
   {% if not page %}
@@ -26,8 +25,15 @@
       </div>
     </div><!-- end page title --> 
     <div class="clearfix"></div>
-    <div class="container">  
-   
+    <div class="container">
+      <!-- left sidebar starts -->
+      <div class="left_sidebar">
+        <div class="sidebar_widget">
+          {% if sidebar_first %}
+                {{ sidebar_first }}
+            {% endif %}  
+        </div><!-- end section -->
+      </div>
      <!--content right side begins--> 
       <div class="content_right">
         <img style="width: 100%;" src="{{ file_url(content.field_basic_image['#items'].entity.uri.value) }}">
