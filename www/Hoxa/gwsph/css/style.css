@@ -1938,10 +1938,11 @@ ul.fun_facts {
 	position: relative;
 	float: left;
 	width: 100%;
-	padding: 40px 0px 28px 0px;
+	padding: 10px 0px 28px 0px;
 }
 .page_title2 .container {
 	background: url(../images/h-line3.png) no-repeat left bottom;
+  padding-bottom: 10px;
 }
 .page_title2 .title {
 	width: 100%;
@@ -5652,6 +5653,10 @@ ul.recentnews {
 
 /* Custom GW Styles */
 
+.pagenation {
+  margin-top: 10px;
+}
+
 ul.alpha li {
   float: left;
   padding: 10px;
@@ -5666,6 +5671,18 @@ div.center {
 
 h4.teaser {
   color: #fff;
+}
+
+li.secondary-nav {
+  margin-left: 20px;
+}
+
+li.secondary-nav > ul {
+  display: none;
+}
+
+li.nav-selected > ul {
+  display: inline !important;
 }
 
 /* Custom Admin Styles */

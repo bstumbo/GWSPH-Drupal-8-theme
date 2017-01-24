@@ -56,4 +56,13 @@ function gwsph_institutes_add_regions_to_node($allowed_regions, &$variables) {
     // Add build to region
     $variables[$region] = $build;
   }
+  
+  function gwsph_institutes_preprocess_breadcrumb(&$variables){
+   if(($node = \Drupal::routeMatch()->getParameter('node')) && $variables['breadcrumb']){
+	   $variables['breadcrumb'][] = array(
+	     'text' => $node->getTitle(),
+	     'url' => $node->URL()
+	   );
+	}
+}
 }
