@@ -1,12 +1,5 @@
 gwsph_institutes:
-  omega:
-    allow_clone_for_subtheme: true
-    allow_enable_disable: true
-    title: 'Default library for gwsph_institutes.'
-    description: 'Default Omega subtheme library description. Please provide a more meaningful description (and title) for this library by editing the gwsph_institutes.libraries.yml file.'
-    scss: 
-      style/css/gwsph_institutes.css: 'style/scss/gwsph_institutes.scss'
-  version: VERSION
+  version: 1.x
   js:
     # Custom Javascript file for your own JS modifications.
     # Examples of behaviors in JS file.
@@ -35,3 +28,13 @@ gwsph_institutes:
 #     - core/jquery
 #     - core/drupal
 #     - core/drupalSettings
+
+tabs:
+  version: 1.x
+  css:
+    theme:
+      ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.css: {}
+  js:    
+    ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
+
+  

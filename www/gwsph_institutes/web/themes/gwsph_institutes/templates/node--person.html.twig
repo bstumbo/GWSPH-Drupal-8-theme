@@ -1,0 +1,50 @@
+<article{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+  
+  <div{{ content_attributes }}>
+    <div class="clearfix"></div>
+   
+    <div class="container">	
+      <div class="features_sec42 two"> 
+           <div class="two_third first">
+                    
+            <div class="box animate" data-anim-type="fadeInUp">
+           
+                <h1>{{ label }}</h1>
+                <h2>{{ content.field_position_title }}</h2>
+                 {{ content.body }}
+            </div><!-- end section -->
+      </div>
+      <div class="one_fourth last">
+              <img src="http://placehold.it/270x245" alt="" class="rimg" />
+            
+            <div class="address_info">
+            
+              <h4>Contact Information</h4>
+              <ul>
+                <li>
+                  Phone: {{ content.field_phn }}<br />
+                  Fax: {{ content.field_fax }}<br />
+                  E-mail: <a href="#">{{ content.field_email }}</a><br />
+                 Address: {{ content.field_address }}</li>
+              </ul>
+              <div class="box">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                </ul>
+              </div>
+            </div>
+             </div>  
+      </div>
+        
+    </div>
+    </div><!-- end content area -->
+</article>

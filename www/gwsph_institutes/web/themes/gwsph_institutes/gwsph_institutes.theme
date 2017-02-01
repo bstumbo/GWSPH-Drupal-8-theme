@@ -4,10 +4,12 @@
  * @file
  * Functions to support theming in the theme.
  */
-
+ 
 /**
 * Implements hook_preprocess_node() for NODE document templates.
 */
+
+
 
 function gwsph_institutes_preprocess_node(&$variables) {
   // Allowed view modes
@@ -17,10 +19,11 @@ function gwsph_institutes_preprocess_node(&$variables) {
   // If view mode is in allowed view modes list, pass to gwsph_institutes_add_regions_to_node()
   if(in_array($view_mode, $allowed_view_modes)) {
     // Allowed regions (for performance so as to not execute for unneeded region)
-    $allowed_regions = ['sidebar_first'];
+    $allowed_regions = array(['sidebar_first'], ['sidebar_second']);
     gwsph_institutes_add_regions_to_node($allowed_regions, $variables);
   }
 }
+
  
 /**
 * gwsph_institutes_add_regions_to_node
@@ -33,14 +36,16 @@ function gwsph_institutes_add_regions_to_node($allowed_regions, &$variables) {
   // Retrieve theme regions
   $available_regions = system_region_list($theme, 'REGIONS_ALL');
  
+  foreach($allowed_regions as $allowed) {
+  
   // Validate allowed regions with available regions
-  $regions = array_intersect(array_keys($available_regions), $allowed_regions);
+  $regions = array_intersect(array_keys($available_regions), $allowed);
  
   // For each region
   foreach ($regions as $key => $region) {
  
     // Load region blocks
-    $blocks = entity_load_multiple_by_properties('block', array('theme' => $theme, 'region' => $region));
+   $blocks = entity_load_multiple_by_properties('block', array('theme' => $theme, 'region' => $region));
  
     // Sort ‘em
     uasort($blocks, 'Drupal\block\Entity\Block::sort');
@@ -57,12 +62,13 @@ function gwsph_institutes_add_regions_to_node($allowed_regions, &$variables) {
     $variables[$region] = $build;
   }
   
-  function gwsph_institutes_preprocess_breadcrumb(&$variables){
-   if(($node = \Drupal::routeMatch()->getParameter('node')) && $variables['breadcrumb']){
-	   $variables['breadcrumb'][] = array(
-	     'text' => $node->getTitle(),
-	     'url' => $node->URL()
-	   );
-	}
+  }
+
 }
+
+/**
+* Added Styles and CSS to article content types
+*/
+function gwsph_institutes_preprocess_node__article(&$variables) {
+  $variables['#attached']['library'][] = 'gwsph_institutes/tabs';
 }

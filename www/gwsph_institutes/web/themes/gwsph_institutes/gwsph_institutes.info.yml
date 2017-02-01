@@ -1,13 +1,9 @@
 name: gwsph_institutes
 type: theme
 description: 'GWSPH Centers and Institutes Primary Theme'
-package: Core
 'base theme': omega
-force_export: false
-inherit_layout: false
-scss_support: false
 libraries:
-  - gwsph_institutes/gwsph_institutes
+ - gwsph_institutes/gwsph_institutes
 regions:
   header: Header
   page_top: 'Page Top'
