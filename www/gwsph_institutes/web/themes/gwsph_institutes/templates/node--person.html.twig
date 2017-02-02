@@ -8,6 +8,11 @@
   {{ title_suffix }}
   
   <div{{ content_attributes }}>
+    <div class="page_title2">
+      <div class="container">
+          <div class="title"><h1>{{ label }}</h1></div>
+      </div>
+    </div><!-- end page title --> 
     <div class="clearfix"></div>
    
     <div class="container">	
@@ -15,32 +20,33 @@
            <div class="two_third first">
                     
             <div class="box animate" data-anim-type="fadeInUp">
-           
-                <h1>{{ label }}</h1>
                 <h2>{{ content.field_position_title }}</h2>
                  {{ content.body }}
             </div><!-- end section -->
       </div>
       <div class="one_fourth last">
-              <img src="http://placehold.it/270x245" alt="" class="rimg" />
-            
+        {% if node.field_image.value %}
+              <img src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" alt="" class="rimg" />
+        {% endif %}    
             <div class="address_info">
-            
-              <h4>Contact Information</h4>
               <ul>
                 <li>
-                  Phone: {{ content.field_phn }}<br />
-                  Fax: {{ content.field_fax }}<br />
-                  E-mail: <a href="#">{{ content.field_email }}</a><br />
-                 Address: {{ content.field_address }}</li>
+                {% if node.field_pos.value %}
+                  <strong>Position Type:</strong> {{ content.field_pos|field_value|safe_join(', ') }}<br />
+                {% endif %}
+                {% if node.field_phn.value %}
+                  <strong>Phone:</strong> {{ content.field_phn|field_value }}<br />
+                {% endif %}
+                {% if node.field_fax.value %}
+                  <strong>Fax:</strong> {{ content.field_fax|field_value }}<br />
+                {% endif %}
+                {% if node.field_email.value %}
+                  <strong>E-mail:</strong> <a href="#">{{ content.field_email|field_value }}</a><br />
+                {% endif %}
+                {% if node.field_address.value %}
+                 <strong>Address:</strong> {{ content.field_address }}</li>
+                {% endif %}
               </ul>
-              <div class="box">
-                <ul>
-                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-              </div>
             </div>
              </div>  
       </div>
