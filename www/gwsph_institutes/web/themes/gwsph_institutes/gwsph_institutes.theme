@@ -72,3 +72,18 @@ function gwsph_institutes_add_regions_to_node($allowed_regions, &$variables) {
 function gwsph_institutes_preprocess_node__article(&$variables) {
   $variables['#attached']['library'][] = 'gwsph_institutes/tabs';
 }
+
+/**
+* Reverse Two Column template
+*/
+function gwsph_institutes_preprocess_node__twocolumnpromotion(&$variables) {
+  $node = $vars['node'];
+  if($node->field_reverse['x-default']['value'] == "1")
+  {
+       $vars['theme_hook_suggestion'] = 'node__reverse-two-column-promotion';
+  } else
+  {
+       $vars['theme_hook_suggestion'] = 'node__two-column-promotion';
+  }
+
+}
