@@ -1,0 +1,44 @@
+<div class="container_full">
+	<div class="content_fullwidth">
+    {% if node.field_background_image.value %}
+    <div class="fusection5"  style="background: url({{ file_url(content.field_background_image['#items'].entity.uri.value)}}) repeat-y center top;" >
+    {% else %}
+    <div class="fusection5">
+    {% endif %}
+      <div class="container">
+        <h2 class="untext">{{ label }}</h2>
+          <br />
+          <div class="one_third animate" data-anim-type="fadeInUp" data-anim-delay="200">
+            
+              <img src="{{ file_url(content.field_image_1['#items'].entity.uri.value) }}" alt="" />
+              <br /><br />
+               {{ content.field_tea }}
+              <br /><br />
+              <a href="{{ content.field_button_1_link|field_value }}">{{ content.field_butt|field_value }}</a>
+          
+          </div>
+          
+          <div class="one_third animate" data-anim-type="fadeInUp" data-anim-delay="350">
+            
+              <img src="{{ file_url(content.field_image_2['#items'].entity.uri.value) }}" alt="" />
+              <br /><br />
+              {{ content.field_teaser_2 }}
+              <br /><br />
+              <a href="{{ content.field_button_2_link|field_value }}">{{ content.field_button_2_text|field_value }}</a>
+          
+          </div>
+          
+          <div class="one_third last animate" data-anim-type="fadeInUp" data-anim-delay="500">
+            
+              <img src="{{ file_url(content.field_image_3['#items'].entity.uri.value) }}" alt="" />
+              <br /><br />
+              {{ content.field_teaser_3 }}
+              <br /><br />
+              <a href="{{ content.field_button_3_link|field_value }}">{{ content.field_button_3_text|field_value }}</a>
+          
+          </div>
+      
+      </div>
+    </div><!-- end features section 5 -->
+  </div><!-- end content_fullwidth -->
+</div> <!-- end container_full -->
