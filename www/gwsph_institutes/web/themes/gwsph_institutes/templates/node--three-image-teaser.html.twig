@@ -2,10 +2,11 @@
 	<div class="content_fullwidth">
     {% if node.field_background_image.value %}
     <div class="fusection5"  style="background: url({{ file_url(content.field_background_image['#items'].entity.uri.value)}}) repeat-y center top;" >
+    <div class="background"></div>
     {% else %}
     <div class="fusection5">
     {% endif %}
-      <div class="container">
+      <div class="container" style="margin-top: 10px; margin-bottom: 20px;">
         <h2 class="untext">{{ label }}</h2>
           <br />
           <div class="one_third animate" data-anim-type="fadeInUp" data-anim-delay="200">

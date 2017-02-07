@@ -123,7 +123,9 @@ h2.caps strong {
 h2.untext { 
 	text-decoration: underline;
 	text-transform: uppercase;
-	padding-bottom: 20px;
+  position: relative;
+	padding-bottom: 10px;
+  padding-top: 10px;
 	text-decoration-color: #e3e3e3;
 	-moz-text-decoration-color: #e3e3e3; /* Code for Firefox */
 }

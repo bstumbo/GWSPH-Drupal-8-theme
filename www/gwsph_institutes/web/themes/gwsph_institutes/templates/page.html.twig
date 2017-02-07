@@ -9,6 +9,12 @@
         </div>
       </div>
     </header> <!-- /.section, /#header-->
+    <!-- Highlighted start-->
+      <div class="pagenation">
+        {% if page.highlighted %}
+          {{ page.highlighted }}
+        {% endif %}
+        </div><!-- Highlighted end-->
   
     <section id="core-outer-wrapper" class="outer-wrapper clearfix">
       <div id="core-layout" class="{{ region_classes.core }} inner-wrapper clearfix">
@@ -19,13 +25,6 @@
     
     <section id="content-outer-wrapper" class="outer-wrapper clearfix">
       <div id="main-layout" class="inner-wrapper clearfix">
-        <div class="container">
-          <div class="pagenation">
-            {% if page.highlighted %}
-              {{ page.highlighted }}
-            {% endif %}
-          </div>
-        </div>
         {% if page.content %}
           {{ page.content }}
         {% endif %}  
