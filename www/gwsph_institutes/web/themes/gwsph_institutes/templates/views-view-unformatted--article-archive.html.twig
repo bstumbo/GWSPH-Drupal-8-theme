@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="content_left">
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+<div class="portfolio p-3-cols simple" id="container">
+{% for row in rows %}
+  {%
+    set row_classes = [
+      'blog_post'
+    ]
+  %}
+		<div{{ row.attributes.addClass(row_classes) }}>
+       <div class="blog_postcontent">
+          {{ row.content }}
+       </div>
+			</div>
+	{% endfor %}
+		
+	</div>
+</div>

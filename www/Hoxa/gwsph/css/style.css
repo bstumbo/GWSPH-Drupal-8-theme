@@ -3932,6 +3932,7 @@ ul.post_meta_links {
 	float: left;
 	margin: -5px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
+  width: 100%;
 }
 .post_meta_links li {
 	float: left;
@@ -3966,10 +3967,15 @@ ul.post_meta_links {
 	margin-bottom: 27px;
 }
 
+.blog_postcontent .image_frame img {
+	max-height: 367.273px;
+  width: 100%;
+}
+
 
 /* blog small */
 .blog_post h3 {
-	width: 74%;
+	width: 100%;
 }
 .blog_postcontent .image_frame.small {
 	float: left;
