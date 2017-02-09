@@ -25,13 +25,22 @@
     
     <section id="content-outer-wrapper" class="outer-wrapper clearfix">
       <div id="main-layout" class="inner-wrapper clearfix">
+        {% if node.title.value %}
+          
+        {% elseif page['#title'] %} <!-- add view titles -->
+          <div class="page_title2">
+            <div class="container">
+              <div class="title"><h1>{{ page['#title'] }}</h1></div>
+            </div>
+          </div><!-- end page title --> 
+        {% endif %}
+        
         {% if page.content %}
           {{ page.content }}
         {% endif %}  
     
       </div><!-- /#main -->
     </section><!-- /#main-outer-wrapper -->
-
     
     {% if page.footer %}
     <footer id="footer-outer-wrapper" class="outer-wrapper clearfix">

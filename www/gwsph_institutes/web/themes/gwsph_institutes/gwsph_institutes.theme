@@ -87,3 +87,5 @@ function gwsph_institutes_add_regions_to_node($allowed_regions, &$variables) {
 function gwsph_institutes_preprocess_node__article(&$variables) {
   $variables['#attached']['library'][] = 'gwsph_institutes/tabs';
 }
+
+

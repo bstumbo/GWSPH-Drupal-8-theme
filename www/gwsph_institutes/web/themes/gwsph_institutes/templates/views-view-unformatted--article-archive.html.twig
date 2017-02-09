@@ -3,7 +3,7 @@
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
-<div class="portfolio p-3-cols simple" id="container">
+
 {% for row in rows %}
   {%
     set row_classes = [
@@ -15,7 +15,12 @@
           {{ row.content }}
        </div>
 			</div>
+      <div class="clearfix divider_dashed9"></div>
 	{% endfor %}
-		
-	</div>
+  </div>
+</div>
+<div class="right_sidebar">
+  {% if sidebar_second %}
+    {{ sidebar_second }}
+  {% endif %} 
 </div>

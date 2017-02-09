@@ -22,7 +22,18 @@
       <div class="container">
           <div class="title"><h1>{{ label }}</h1></div>
       </div>
-    </div><!-- end page title --> 
-    {{ content }}
+    </div><!-- end page title -->
+    {% if sidebar_second %}
+    <div class="container">
+      <div class="content_left">
+        {{ content }}
+      </div>
+      <div class="right_sidebar">
+        {{ sidebar_second }}
+      </div>
+    </div>
+    {% else %}
+      {{ content }}
+    {% endif %} 
   </div>
 </article>

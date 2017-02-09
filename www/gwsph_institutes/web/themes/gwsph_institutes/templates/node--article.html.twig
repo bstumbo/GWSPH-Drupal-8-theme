@@ -22,8 +22,12 @@
         <div class="content_left">
               <div class="blog_post">	
                   <div class="blog_postcontent">
+                    {% if node.field_image.value %}
                   <div class="image_frame"><a href="#"><img src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" alt="" /></a></div>
+                {% endif %}
+                {% if node.field_sub_header.value %}
                   <h3>{{ content.field_sub_header }}</h3>
+                 {% endif %} 
                       <ul class="post_meta_links">
                           <li><a href="#" class="date">{{ date }}</a></li>
                           <li class="post_by"><i>By:</i> {{ author_name }}</li>
