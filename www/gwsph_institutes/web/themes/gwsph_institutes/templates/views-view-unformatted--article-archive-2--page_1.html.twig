@@ -3,7 +3,7 @@
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
-
+{% if rows %}
 {% for row in rows %}
   {%
     set row_classes = [
@@ -20,7 +20,21 @@
   </div>
   <div class="right_sidebar">
     {{ drupal_block('exposedformarticle_archive_2page_1') }}
-    <p>test</p>
     {{ drupal_block('categories') }}
+    {{ drupal_block('authoredon') }}  
   </div>
+{% elseif empty %}
+  <div{{ row.attributes.addClass(row_classes) }}>
+       <div class="blog_postcontent">
+          <p>No results behavior</p>
+       </div>
+			</div>
+      <div class="clearfix divider_dashed9"></div>
+      </div>
+    <div class="right_sidebar">
+      {{ drupal_block('exposedformarticle_archive_2page_1') }}
+      {{ drupal_block('categories') }}
+      {{ drupal_block('authoredon') }}
+  </div>
+{% endif %}
 </div>

@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="content_left">
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+{% if rows %}
+{% for row in rows %}
+  {%
+    set row_classes = [
+      'blog_post'
+    ]
+  %}
+		<div{{ row.attributes.addClass(row_classes) }}>
+       <div class="blog_postcontent">
+          {{ row.content }}
+       </div>
+			</div>
+      <div class="clearfix divider_dashed9"></div>
+	{% endfor %}
+  </div>
+  <div class="right_sidebar">
+    {{ drupal_block('exposedformsite_searchpage_1') }} 
+  </div>
+{% elseif empty %}
+  <div{{ row.attributes.addClass(row_classes) }}>
+       <div class="blog_postcontent">
+          <p>No results behavior</p>
+       </div>
+			</div>
+      <div class="clearfix divider_dashed9"></div>
+      </div>
+    <div class="right_sidebar">
+      {{ drupal_block('exposedformsite_searchpage_1') }}
+  </div>
+{% endif %}
+</div>

@@ -1,0 +1,18 @@
+<div class="content_fullwidth">
+  <div class="container">      
+    {% if title %}
+      <h3>{{ title }}</h3>
+    {% endif %}
+    <div class="features_sec42 two">
+      <div class="container">
+        {% for row in rows %}
+          <div class="one_fourth animate" data-anim-type="fadeInUp">
+             <div class="box">
+               {{ row.content }}
+             </div>
+          </div>  
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
