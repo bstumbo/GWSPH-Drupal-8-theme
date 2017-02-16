@@ -613,3 +613,13 @@ height: 0;
 .rimg {
 	width: 100%;
 }
+
+div.rimg img {
+  width: 100%;
+  height: 100%;
+}
+
+.story-teaser img {
+  max-width: 360px;
+  max-height: 180px;
+}

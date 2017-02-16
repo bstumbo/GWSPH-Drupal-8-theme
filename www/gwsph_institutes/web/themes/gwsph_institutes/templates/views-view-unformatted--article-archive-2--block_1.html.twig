@@ -1,0 +1,12 @@
+<div class="feature_section5">
+  <div class="container">
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+{% for row in rows %}
+		<div class="one_third animate" data-anim-type="fadeInUp">
+        {{ row.content }}
+		</div>
+	{% endfor %}
+  </div>
+</div>

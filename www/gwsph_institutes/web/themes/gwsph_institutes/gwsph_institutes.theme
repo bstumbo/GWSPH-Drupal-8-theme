@@ -88,4 +88,12 @@ function gwsph_institutes_preprocess_node__article(&$variables) {
   $variables['#attached']['library'][] = 'gwsph_institutes/tabs';
 }
 
+/**
+* Added CSS to exposed directory search form block
+*/
+
+function gwsph_institutes_preprocess_block__exposedformdirectorypage_1(&$variables) {
+  $variables['#attached']['library'][] = 'gwsph_institutes/forms';
+}
+
 

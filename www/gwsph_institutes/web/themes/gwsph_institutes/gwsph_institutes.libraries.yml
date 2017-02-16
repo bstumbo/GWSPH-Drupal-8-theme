@@ -37,4 +37,12 @@ tabs:
   js:    
     ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
 
+forms:
+  version: 1.x
+  css:
+    theme:
+      ../../../../Hoxa/gwsph/js/form/sky-forms.css: {}
+  js:    
+    ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
+
   
