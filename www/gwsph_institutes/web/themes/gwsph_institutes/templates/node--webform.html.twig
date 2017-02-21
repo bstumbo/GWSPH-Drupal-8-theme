@@ -1,0 +1,43 @@
+<article{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes }}>
+    <div class="page_title2">
+      <div class="container">
+          <div class="title"><h1>{{ label }}</h1></div>
+      </div>
+    </div><!-- end page title --> 
+    <div class="clearfix"></div>
+    <div class="container">
+      <!-- left sidebar starts -->
+      <div class="left_sidebar">
+        <div class="sidebar_widget">
+          {% if sidebar_first %}
+                {{ sidebar_first }}
+            {% endif %}  
+        </div><!-- end section -->
+      </div>
+     <!--content right side begins--> 
+      <div class="content_right">
+            {{ content.body }}
+            {{ content.webform }}
+      </div><!-- end content right side -->
+    </div><!-- end content area -->
+  </div>
+</article>

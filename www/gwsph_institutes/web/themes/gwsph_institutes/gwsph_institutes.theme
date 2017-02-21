@@ -96,4 +96,13 @@ function gwsph_institutes_preprocess_block__exposedformdirectorypage_1(&$variabl
   $variables['#attached']['library'][] = 'gwsph_institutes/forms';
 }
 
+/**
+* Added CSS and JS to form pages
+*/
+
+function gwsph_institutes_preprocess_node__webform(&$variables) {
+  $variables['#attached']['library'][] = 'gwsph_institutes/forms';
+}
+
+
 
