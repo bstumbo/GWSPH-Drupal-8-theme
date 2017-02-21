@@ -35,7 +35,9 @@
       </div>
      <!--content right side begins--> 
       <div class="content_right">
+        {% if node.field_basic_image.value %}
         <img style="width: 100%;" src="{{ file_url(content.field_basic_image['#items'].entity.uri.value) }}">
+        {% endif %}
           <h3><strong>{{ content.field_sub_header }} </strong></h3>
             {{ content.body }}              
       </div><!-- end content right side -->

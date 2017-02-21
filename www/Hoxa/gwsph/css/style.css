@@ -3342,6 +3342,7 @@ a.but_download {
 }
 a.but_download:hover {
 	background-color: #0073AA;
+  color: #fff;
 }
 
 a.but_pdf {
@@ -3895,7 +3896,7 @@ ul.list_empty {
 	background-color: #fff;
 }
 .framed-box-wrap .pricing-title {
-	background-color: #C9102F;
+
 	padding: 20px 0px 0px 0px;
 	text-align: center;
 	border-bottom: 1px solid #fff;
@@ -5703,4 +5704,30 @@ li.nav-selected > ul {
 
 body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-oriented .toolbar-tray {
   z-index: 10000;
+}
+
+/* Custom Background Colors */
+
+.background-light-blue {
+  background: #0073AA;
+}
+
+.background-dark-blue {
+  background: #033C5A;
+}
+
+.background-green {
+  background: #008364;
+}
+
+.background-red {
+  background: #C9102F;
+}
+
+.background-purple {
+  background: #9C688A;
+}
+
+.background-brown {
+  background: #A75523;
 }

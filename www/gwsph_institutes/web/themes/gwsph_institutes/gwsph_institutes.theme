@@ -104,5 +104,21 @@ function gwsph_institutes_preprocess_node__webform(&$variables) {
   $variables['#attached']['library'][] = 'gwsph_institutes/forms';
 }
 
+/**
+* CSS for Accordions and Tabs
+*/
+
+function gwsph_institutes_css_alter(&$css) {
+  $names = array(
+    'core', 'theme', 'accordion', 'tabs',
+  );
+ $csspath = drupal_get_path('theme', 'gwsph_institutes') . '/style/css/ui/';
+ foreach ($names as $file) {
+   if (isset($css["core/assets/vendor/jquery.ui/themes/base/$file.css"])){
+    $css["core/assets/vendor/jquery.ui/themes/base/$file.css"]['data'] = $csspath . $file . '.css';
+  }
+ }
+}
+
 
 
