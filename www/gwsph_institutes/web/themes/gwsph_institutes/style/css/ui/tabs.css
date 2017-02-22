@@ -10,30 +10,38 @@
  */
 .ui-tabs {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
-	padding: .2em;
 }
 .ui-tabs .ui-tabs-nav {
-	margin: 0;
-	padding: .2em .2em 0;
+	height: 54px;
+  background-color: #4A4A4A;
 }
 .ui-tabs .ui-tabs-nav li {
 	list-style: none;
 	float: left;
 	position: relative;
 	top: 0;
-	margin: 1px .2em 0 0;
-	border-bottom-width: 0;
 	padding: 0;
+  font-family: 'Raleway', sans-serif;
 	white-space: nowrap;
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
 	float: left;
-	padding: .5em 1em;
+	padding: 0px 40px;
+  height: 54px;
+  line-height: 54px;
+  color: #ffffff;
+  border-right: 1px #fff solid;
 	text-decoration: none;
 }
+
+.ui-tabs .ui-tabs-nav a.ui-tabs-anchor:hover {
+	color: #78BE20;
+}
+
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
 	margin-bottom: -1px;
 	padding-bottom: 1px;
+  background-color: #0073AA;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
 .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
