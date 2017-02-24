@@ -5731,3 +5731,12 @@ body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-o
 .background-brown {
   background: #A75523;
 }
+
+/* GWSPH Header Styles */
+
+.header-100 {
+  width: 100%;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  height: 100%;
+}
