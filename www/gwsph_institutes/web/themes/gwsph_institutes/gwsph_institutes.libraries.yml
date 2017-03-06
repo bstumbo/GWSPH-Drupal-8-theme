@@ -5,7 +5,6 @@ gwsph_institutes:
     # Examples of behaviors in JS file.
     js/gwsph_institutes.js: {}
     ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.js: {}
-    ../../../../Hoxa/gwsph/js/mainmenu/sticky.js: {}
     ../../../../Hoxa/gwsph/js/mainmenu/modernizr.custom.75180.js: {}
     ../../../../Hoxa/gwsph/js/accordion/custom.js: {}
     ../../../../Hoxa/gwsph/js/scrolltotop/totop.js: {}
@@ -44,5 +43,9 @@ forms:
       ../../../../Hoxa/gwsph/js/form/sky-forms.css: {}
   js:    
     ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
+sticky:
+  version: 1.x
+  js:
+    js/sticky.js: {}
 
   

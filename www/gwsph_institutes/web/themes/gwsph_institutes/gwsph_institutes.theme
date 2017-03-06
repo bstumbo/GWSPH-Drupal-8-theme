@@ -26,6 +26,10 @@ function gwsph_institutes_theme_suggestions_node_alter(array &$suggestions, arra
 
 function gwsph_institutes_preprocess_node(&$variables) {
   
+  // Add sticky.js to all nodes
+  
+  $variables['#attached']['library'][] = 'gwsph_institutes/sticky';
+  
   
   // Allowed view modes
   $view_mode = $variables['view_mode']; // Retrieve view mode
@@ -119,6 +123,7 @@ function gwsph_institutes_css_alter(&$css) {
   }
  }
 }
+
 
 
 
