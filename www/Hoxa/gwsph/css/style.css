@@ -3545,18 +3545,20 @@ ul.list_empty {
 .table-list {
 	float: left;
 	background-color: #fff;
-	border: 1px solid #000;
+	border: 2px solid #000;
 	margin-bottom:20px;
 	width: 100%;
 }
 .table-list th {
 	color: #fff;
   padding: 18px 10px;
+  border: 1px white solid;
 	background-color: #033C5A;
 }
 .table-list td {
 	padding: 13px 10px;
 	text-align: center;
+  border: 1px white solid;
 	background-color: #fff;
 }
 .table-list tr:hover td {
