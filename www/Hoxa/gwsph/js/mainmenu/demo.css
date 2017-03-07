@@ -13,7 +13,7 @@
 }*/
 pre { margin: 0; padding: 10px 20px !important;}
 
-#header .container { width: auto; max-width: 1170px; }
+#header-outer-wrapper .container { width: auto; max-width: 1170px; }
 .jumbotron {
   margin: 60px 0;
   padding-left: 0;
@@ -54,13 +54,13 @@ pre { margin: 0; padding: 10px 20px !important;}
 
 @media only screen and (min-width: 1000px) and (max-width: 1169px){
 	
-#header .container { width: auto; max-width: 1000px; }
+#header-outer-wrapper .container { width: auto; max-width: 1000px; }
 
 }
 	
 @media only screen and (min-width: 768px) and (max-width: 999px){
 	
-#header .container { width: auto; max-width: 747px; }
+#header-outer-wrapper .container { width: auto; max-width: 747px; }
 
 }
 
@@ -68,12 +68,12 @@ pre { margin: 0; padding: 10px 20px !important;}
 @media only screen and (min-width: 480px) and (max-width: 767px){
 	
 
-#header .container { width: auto; max-width: 460px; }
+#header-outer-wrapper .container { width: auto; max-width: 460px; }
 
 }
 
 @media only screen and (max-width: 479px){
 	
-#header .container { width: auto; max-width: 300px; }
+#header-outer-wrapper .container { width: auto; max-width: 300px; }
 
 }

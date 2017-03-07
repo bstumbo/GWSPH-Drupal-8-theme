@@ -43,7 +43,8 @@
           <div class="navbar-toggle .navbar-collapse .pull-right " data-toggle="collapse" data-target="#navbar-collapse-1"  > <span>Menu</span>
             <button type="button" > <i class="fa fa-bars"></i></button>
           </div>
-          <div id="navbar-collapse-1" class="navbar-collapse collapse">
+        </div>
+         <div id="navbar-collapse-1" class="navbar-collapse collapse">
             {# Label. If not displayed, we still provide it for screen readers. #}
             {% if not configuration.label_display %}
             {% set title_attributes = title_attributes.addClass('visually-hidden') %}
@@ -56,12 +57,11 @@
             {{ content }}
           {% endblock %}
            <div id="wrap">
-            <form action="/gwsph_institutes/web/search" autocomplete="on">
+            <form action="multisite/gwsph_institutes/web/search" autocomplete="on">
             <input id="edit-search-api-fulltext" name="search_api_fulltext" type="text" placeholder=""><input id="edit-submit-site-search" value="search" type="submit">
             </form>
           </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

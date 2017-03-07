@@ -16,8 +16,10 @@ gwsph_institutes:
       ../../../../Hoxa/gwsph/css/responsive-leyouts.css: {}
       ../../../../Hoxa/gwsph/css/reset.css: {}
       ../../../../Hoxa/gwsph/js/mainmenu/sticky.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/menu.css: {}
       ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/menu.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/demo.css: {}
+      ../../../../Hoxa/gwsph/js/mainmenu/stickytwo.css: {}
       ../../../../Hoxa/gwsph/js/tabs/assets/css/responsive-tabs3.css: {}
       ../../../../Hoxa/gwsph/js/accordion/accordion.css: {}
       ../../../../Hoxa/gwsph/css/font-awesome/css/font-awesome.min.css: {}
