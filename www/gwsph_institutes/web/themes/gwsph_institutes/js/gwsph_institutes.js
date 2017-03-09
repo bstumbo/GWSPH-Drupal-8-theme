@@ -2,8 +2,10 @@
 
   "use strict";
   
-  Drupal.behaviors.customBehavior = {
-    // perform jQuery as normal in here
+  Drupal.behaviors.tinynav = {
+  attach: function (context, settings) {
+    $('#nav').tinyNav({header: 'Section Pages'});
+  }
   };
   
 })(jQuery);

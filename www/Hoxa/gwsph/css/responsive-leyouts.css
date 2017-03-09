@@ -554,7 +554,7 @@
 .left_sidebar {
 	float: left;
 	width: 100%;
-	padding: 59px 0px 0px 0px;
+	/* padding: 59px 0px 0px 0px; */
 }
 .content_right {
 	float: left;
@@ -1218,7 +1218,7 @@ ul.clients_home {
 .left_sidebar {
 	float: left;
 	width: 100%;
-	padding: 59px 0px 0px 0px;
+	/*padding: 59px 0px 0px 0px;*/
 }
 .content_right {
 	float: left;

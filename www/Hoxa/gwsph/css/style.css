@@ -5742,3 +5742,16 @@ body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-o
   background-repeat: no-repeat !important;
   height: 100%;
 }
+
+/* TinyNav styles */
+
+.tinynav1 {width: 95%; padding: 10px; }
+
+/* styles for desktop */
+.tinynav { display: none }
+
+/* styles for mobile */
+@media screen and (max-width: 600px) {
+    .tinynav { display: block }
+    #nav { display: none }
+}

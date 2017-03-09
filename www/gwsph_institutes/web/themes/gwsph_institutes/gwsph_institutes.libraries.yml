@@ -9,6 +9,7 @@ gwsph_institutes:
     ../../../../Hoxa/gwsph/js/accordion/custom.js: {}
     ../../../../Hoxa/gwsph/js/scrolltotop/totop.js: {}
     ../../../../Hoxa/gwsph/js/animations/js/animations.min.js: {}
+    js/tinynav.js: {}
   css:
     theme:
       # Custom CSS file to be loaded in all media circumstances

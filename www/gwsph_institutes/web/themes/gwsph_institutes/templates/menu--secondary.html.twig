@@ -35,7 +35,7 @@
     ]%}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass(menu_classes) }}>
+      <ul{{ attributes.addClass(menu_classes) }} id="nav">
     {% else %}
       <ul>
     {% endif %}
@@ -57,3 +57,4 @@
     </ul>
   {% endif %}
 {% endmacro %}
+
