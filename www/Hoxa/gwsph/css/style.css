@@ -4053,7 +4053,7 @@ ul.post_meta_links_small {
 }
 .blog_post a.date {
 	color: #454545;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 }
 .blog_post a.date:hover {
@@ -4305,6 +4305,25 @@ font-weight: normal;
 padding: 8px 15px;
 border-radius: 4px;
 border: 1px;
+}
+
+.form-item-search-api-fulltext {
+  width: 100%;
+  padding: 5px;
+}
+
+#edit-search-api-fulltext {
+  width: 100%;
+  padding: 6px;
+}
+#edit-submit-directory {
+  margin-left: 0px !important;
+}
+
+#views-exposed-form-directory-page-1 input#edit-reset
+{
+  border-radius: 0px;
+  padding: 0px 25px;
 }
 
 /* site search */

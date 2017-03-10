@@ -132,6 +132,11 @@
 /**/
 /* selects */
 /**/
+select {
+  width: 100%;
+  padding: 10px !important;
+}
+
 .sky-form .select i {
 	position: absolute;
 	top: 14px;
