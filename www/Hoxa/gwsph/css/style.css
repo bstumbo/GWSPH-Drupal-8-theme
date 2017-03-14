@@ -58,6 +58,11 @@
 	margin: auto auto auto auto;
 }
 
+.field__item .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .content_fullwidth {
 	float: left;
 	width: 100%;
@@ -410,6 +415,7 @@
   float: left;
 	width: 100%;
 	padding: 65px 0px;
+  margin: 20px 0px;
 	background-color: rgba(3, 60, 90, .7);
 }
 
@@ -1902,8 +1908,9 @@ ul.fun_facts {
 }
 .parallax_sec9 li {
 	float: left;
+  list-style: none !important;
 	width: 19%;
-	margin: 0px 5px;
+	margin: 0px 5px !important;
 	padding: 12px 0px;
 	text-align: center;
 	border: 1px solid #575757;
@@ -3547,18 +3554,21 @@ ul.list_empty {
 	background-color: #fff;
 	border: 2px solid #000;
 	margin-bottom:20px;
+  table-layout: fixed;
 	width: 100%;
 }
 .table-list th {
 	color: #fff;
   padding: 18px 10px;
   border: 1px white solid;
+  word-wrap: break-word;
 	background-color: #033C5A;
 }
 .table-list td {
 	padding: 13px 10px;
 	text-align: center;
   border: 1px white solid;
+  word-wrap: break-word;
 	background-color: #fff;
 }
 .table-list tr:hover td {
@@ -5644,6 +5654,11 @@ ul.recentnews {
 	margin-right: 20px;
 }
 
+.recent_image img {
+  width: 100%;
+  height: auto;
+}
+
 /* features section 9 */
 .fusection9 {
 	float: left;
@@ -5746,8 +5761,57 @@ li.nav-selected > ul {
 
 /* Custom Admin Styles */
 
+.field--name-body ul li {
+  list-style: disc;
+  margin: 0 0  5px 40px;
+}
+
+.field--name-body ul li.ui-state-default {
+  margin: 0px;
+}
+
+
+.field--name-body ul li.social {
+  list-style: none;
+}
+
+.field--name-body ul.recent_posts_list li {
+  list-style: none;
+  margin: 0px 0px 16px 0px;
+  
+}
+
+.field--name-body ul.tags li {
+  list-style: none;
+  margin: 0px 0px 16px 0px;
+  
+}
+
+.field--name-body ul li ul li {
+  list-style: circle;
+  margin: 0 0  5px 40px;
+}
+
+.field--name-body ol li {
+  list-style: upper-roman;
+  margin: 0 0  5px 40px;
+}
+
+.field--name-body ol li ol li {
+  list-style: lower-roman;
+  margin: 0 0  5px 40px;
+}
+
 body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-oriented .toolbar-tray {
   z-index: 10000;
+}
+
+.footer1 .container ul li {
+  list-style: none;
+}
+
+.no-bullet {
+  list-style: none !important;
 }
 
 /* Custom Background Colors */

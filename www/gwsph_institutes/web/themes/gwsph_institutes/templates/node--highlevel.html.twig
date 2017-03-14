@@ -18,11 +18,13 @@
   {% endif %}
 
   <div{{ content_attributes }}>
+    {% if label %}
    <div class="page_title2">
       <div class="container">
           <div class="title"><h1>{{ label }}</h1></div>
       </div>
     </div><!-- end page title -->
+  {% endif %}
     {% if sidebar_second %}
     <div class="container">
       <div class="content_left">

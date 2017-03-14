@@ -621,6 +621,6 @@ div.rimg img {
 }
 
 .story-teaser img {
-  max-width: 360px;
-  max-height: 180px;
+  max-width: 100%;
+  height: auto;
 }
