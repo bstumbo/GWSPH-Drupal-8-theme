@@ -3,6 +3,7 @@
 	float:left;
 	clear:both;
 	width: 98%;
+  margin-bottom: 10px;
 	background-color: #eee;
 }
 ul.tabs {
