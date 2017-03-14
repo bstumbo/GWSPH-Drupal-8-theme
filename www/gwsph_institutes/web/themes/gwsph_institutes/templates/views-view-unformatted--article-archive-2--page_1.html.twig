@@ -17,28 +17,12 @@
 			</div>
       <div class="clearfix divider_dashed9"></div>
 	{% endfor %}
+{% endif %}
   </div>
-  <div class="right_sidebar">
+ <div class="right_sidebar">
     {{ drupal_block('exposedformarticle_archive_2page_1') }}
     <h5>&nbsp;</h5>
-    <h5>Categories</h5>
     {{ drupal_block('categories') }}
     {{ drupal_block('authoredon') }}  
   </div>
-{% elseif empty %}
-  <div{{ row.attributes.addClass(row_classes) }}>
-       <div class="blog_postcontent">
-          <p>No results behavior</p>
-       </div>
-			</div>
-      <div class="clearfix divider_dashed9"></div>
-      </div>
-    <div class="right_sidebar">
-      {{ drupal_block('exposedformarticle_archive_2page_1') }}
-      <h5>&nbsp;</h5>
-      <h5>Categories</h5>
-      {{ drupal_block('categories') }}
-      {{ drupal_block('authoredon') }}
-  </div>
-{% endif %}
 </div>
