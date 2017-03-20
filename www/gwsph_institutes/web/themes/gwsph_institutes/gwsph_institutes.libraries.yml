@@ -4,26 +4,26 @@ gwsph_institutes:
     # Custom Javascript file for your own JS modifications.
     # Examples of behaviors in JS file.
     js/gwsph_institutes.js: {}
-    ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.js: {}
-    ../../../../Hoxa/gwsph/js/mainmenu/modernizr.custom.75180.js: {}
-    ../../../../Hoxa/gwsph/js/accordion/custom.js: {}
-    ../../../../Hoxa/gwsph/js/scrolltotop/totop.js: {}
-    ../../../../Hoxa/gwsph/js/animations/js/animations.min.js: {}
+    js/js/mainmenu/bootstrap.min.js: {}
+    js/js/mainmenu/modernizr.custom.75180.js: {}
+    js/js/accordion/custom.js: {}
+    js/js/scrolltotop/totop.js: {}
+    js/js/animations/js/animations.min.js: {}
     js/tinynav.js: {}
   css:
     theme:
       # Custom CSS file to be loaded in all media circumstances
-      ../../../../Hoxa/gwsph/css/style.css: {}
-      ../../../../Hoxa/gwsph/css/responsive-leyouts.css: {}
-      ../../../../Hoxa/gwsph/css/reset.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/sticky.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/bootstrap.min.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/menu.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/demo.css: {}
-      ../../../../Hoxa/gwsph/js/mainmenu/stickytwo.css: {}
-      ../../../../Hoxa/gwsph/js/tabs/assets/css/responsive-tabs3.css: {}
-      ../../../../Hoxa/gwsph/js/accordion/accordion.css: {}
-      ../../../../Hoxa/gwsph/css/font-awesome/css/font-awesome.min.css: {}
+      style/css/style.css: {}
+      style/css/responsive-leyouts.css: {}
+      style/css/reset.css: {}
+      js/js/mainmenu/sticky.css: {}
+      js/js/mainmenu/bootstrap.min.css: {}
+      js/js/mainmenu/menu.css: {}
+      js/js/mainmenu/demo.css: {}
+      js/js/mainmenu/stickytwo.css: {}
+      js/js/tabs/assets/css/responsive-tabs3.css: {}
+      js/js/accordion/accordion.css: {}
+      style/css/font-awesome/css/font-awesome.min.css: {}
       style/css/gwsph_institutes.css: {}
   dependencies:
 #     - core/modernizr
@@ -35,17 +35,17 @@ tabs:
   version: 1.x
   css:
     theme:
-      ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.css: {}
+      js/js/tabs/tabwidget/tabwidget.css: {}
   js:    
-    ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
+    js/js/tabs/tabwidget/tabwidget.js: {}
 
 forms:
   version: 1.x
   css:
     theme:
-      ../../../../Hoxa/gwsph/js/form/sky-forms.css: {}
+      js/js/form/sky-forms.css: {}
   js:    
-    ../../../../Hoxa/gwsph/js/tabs/tabwidget/tabwidget.js: {}
+    js/js/tabs/tabwidget/tabwidget.js: {}
 sticky:
   version: 1.x
   js:
