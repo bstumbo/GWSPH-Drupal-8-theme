@@ -1,1 +1,0 @@
-{"virtualbox":{"/var/www":{"guestpath":"/var/www","hostpath":"C:/wamp/www/drupal8/www","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/wamp/www/drupal8","disabled":false,"__vagrantfile":true}}}
