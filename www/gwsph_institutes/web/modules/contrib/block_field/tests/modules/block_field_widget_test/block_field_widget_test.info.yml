@@ -1,15 +1,16 @@
-name: 'Block field module tests'
+name: 'Block field module widget tests'
 type: module
-description: 'Support module for Block field that provides a working example of a block field.'
+description: 'Support module for block field that provides some default configuration to test the field widget.'
 package: Testing
 # core: 8.x
 dependencies:
+  - block
   - block_field
   - field
-  - menu_ui
   - node
-  - path
   - user
+  - views
+
 
 # Information added by Drupal.org packaging script on 2017-02-20
 version: '8.x-1.0-alpha4'

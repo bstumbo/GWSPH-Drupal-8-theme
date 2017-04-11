@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\block_field\Tests\BlockFieldTest.
+ */
+
 namespace Drupal\block_field\Tests;
 
 use Drupal\simpletest\WebTestBase;
@@ -16,17 +21,25 @@ class BlockFieldTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'user', 'block', 'block_field', 'block_field_test'];
+  public static $modules = [
+    'node',
+    'user',
+    'block',
+    'block_field',
+    'block_field_test',
+    'field_ui',
+  ];
 
   /**
    * Tests block field.
    */
-  function testBlockField() {
+  public function testBlockField() {
     $admin_user = $this->drupalCreateUser([
       'access content',
       'administer nodes',
       'administer content types',
       'bypass node access',
+      'administer node fields',
     ]);
     $this->drupalLogin($admin_user);
 
@@ -130,6 +143,12 @@ class BlockFieldTest extends WebTestBase {
     $this->drupalGet('node/' . $block_node->id());
     $this->assertPattern('/\d\d:\d\d:\d\d \(\d+\)/');
     $this->assertNoRaw($time);
+
+    $this->drupalGet('admin/structure/types/manage/block_field_test/fields/node.block_field_test.field_block_field_test');
+    $this->drupalPostForm(NULL, ['settings[plugin_ids][page_title_block]' => FALSE], t('Save settings'));
+
+    $this->drupalGet('admin/structure/types/manage/block_field_test/fields/node.block_field_test.field_block_field_test');
+    $this->assertResponse(200);
   }
 
 }

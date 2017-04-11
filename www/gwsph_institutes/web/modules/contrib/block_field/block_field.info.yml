@@ -4,8 +4,8 @@ description: 'Provides a field that allows a content entity to create and config
 package: Field
 # core: 8.x
 
-# Information added by Drupal.org packaging script on 2016-05-23
-version: '8.x-1.0-alpha3'
+# Information added by Drupal.org packaging script on 2017-02-20
+version: '8.x-1.0-alpha4'
 core: '8.x'
 project: 'block_field'
-datestamp: 1464034534
+datestamp: 1487611086

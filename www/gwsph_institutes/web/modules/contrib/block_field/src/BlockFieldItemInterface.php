@@ -21,5 +21,5 @@ interface BlockFieldItemInterface extends FieldItemInterface {
    *   Return the block instance or NULL if the block does not exist.
    */
   public function getBlock();
-  
+
 }

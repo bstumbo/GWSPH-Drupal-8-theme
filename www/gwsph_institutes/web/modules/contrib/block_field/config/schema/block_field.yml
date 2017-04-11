@@ -29,6 +29,8 @@ field.field_settings.block_field:
     plugin_ids:
       type: sequence
       label: 'Plugin ids'
+      sequence:
+        type: string
 
 field.value.block_field:
   type: mapping

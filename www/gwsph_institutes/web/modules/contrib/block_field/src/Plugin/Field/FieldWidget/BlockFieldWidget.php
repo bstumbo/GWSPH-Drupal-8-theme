@@ -7,12 +7,12 @@
 
 namespace Drupal\block_field\Plugin\Field\FieldWidget;
 
-use Drupal\block\BlockInterface;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\SubformState;
 
 /**
  * Plugin implementation of the 'block_field' widget.
@@ -41,14 +41,11 @@ class BlockFieldWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\Core\Block\BlockManagerInterface $block_manager */
-    $block_manager = \Drupal::service('plugin.manager.block');
-
     /** @var \Drupal\block_field\BlockFieldItemInterface $item */
     $item =& $items[$delta];
 
     $field_name = $this->fieldDefinition->getName();
-    $settings_id = $field_name . '-' . $delta . '-settings';
+    $settings_id = implode('-', array_merge($element['#field_parents'], [$field_name, $delta, 'settings']));
 
     $plugin_ids = $this->fieldDefinition->getSetting('plugin_ids');
 
@@ -186,6 +183,34 @@ class BlockFieldWidget extends WidgetBase {
       // Clear all configuration settings.
       NestedArray::setValue($values, $element['settings']['#parents'], []);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+    // @todo: Inject the block manager as proper dependency.
+    /** @var \Drupal\Core\Block\BlockManagerInterface $block_manager */
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $field_name = $this->fieldDefinition->getName();
+
+    // Some blocks clean the processed values in form state. However, entity
+    // forms extract the form values twice during submission. For the second
+    // submission to work as well, we need to prevent the removal of the form
+    // values during the first submission.
+    $form_state = clone $form_state;
+
+    foreach ($values as $delta => &$value) {
+      // Execute block submit configuration in order to transform the form
+      // values into block configuration.
+      if (!empty($value['plugin_id']) && !empty($value['settings']) && $block = $block_manager->createInstance($value['plugin_id'])) {
+        $elements = &$form[$field_name]['widget'][$delta]['settings'];
+        $subform_state = SubformState::createForSubform($elements, $form_state->getCompleteForm(), $form_state);
+        $block->submitConfigurationForm($elements, $subform_state);
+        $value['settings'] = $block->getConfiguration();
+      }
+    }
+    return $values;
   }
 
 }

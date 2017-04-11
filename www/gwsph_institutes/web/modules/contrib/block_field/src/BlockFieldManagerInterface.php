@@ -19,5 +19,5 @@ interface BlockFieldManagerInterface {
    *   An associative array of supported block definitions.
    */
   public function getBlockDefinitions();
-  
+
 }
