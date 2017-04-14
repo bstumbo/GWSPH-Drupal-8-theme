@@ -160,27 +160,27 @@
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsContent}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsContent}*/;
 }
 .ui-widget-header .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsHeader}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsHeader}*/;
 }
 .ui-state-default .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsDefault}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsDefault}*/;
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsHover}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsHover}*/;
 }
 .ui-state-active .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsActive}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsActive}*/;
 }
 .ui-state-highlight .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsHighlight}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsHighlight}*/;
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url("http://127.0.0.1:4568/Hoxa/gwsph/images/accordion-ico.png")/*{iconsError}*/;
+	background-image: url("../../images/accordion-ico.png")/*{iconsError}*/;
 }
 
 /* positioning */
