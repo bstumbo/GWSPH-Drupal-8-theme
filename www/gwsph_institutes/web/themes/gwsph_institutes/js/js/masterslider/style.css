@@ -394,7 +394,7 @@ text-shadow: 0 1px 0 #FFF;
 	font-size: 16px;
 	color: #fff;
 	font-weight: normal;
-	background-color: #272727;
+	background-color: #033C5A;
 	padding: 18px 30px;
 	border-radius: 4px;
 	-webkit-transition:width .3s, height .3s, background-color .3s, -webkit-transform .3s;
@@ -402,7 +402,7 @@ text-shadow: 0 1px 0 #FFF;
 }
 .sbutton1:hover {
 	color: #fff;
-	background-color: #7ab700;
+	background-color: #0073AA;
 }
 
 .sbutton4 {
