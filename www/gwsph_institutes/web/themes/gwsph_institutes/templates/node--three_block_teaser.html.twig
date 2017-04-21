@@ -9,9 +9,11 @@
 					</div>
 					<div class="pricing-text-list">
             {{ content.field_block_1 }}
-						<br />
-					<p><a href="{{ content.field_block_1_button_link|field_value }}" class="but_download"> {{ content.field_block_1_button_text|field_value }}</a></p>
-					</div>
+						{% if node.field_block_1_button_link.value %}
+            <br />
+          <p><a href="{{ content.field_block_1_button_link|field_value }}" class="but_download"> {{ content.field_block_1_button_text|field_value }}</a></p>
+          {% endif %}
+          </div>
 				</div>
 				
 			</div>
@@ -25,9 +27,11 @@
 					</div>
 					<div class="pricing-text-list">
             {{ content.field_block_2 }}
-						<br />
-					<p><a href="{{ content.field_block_2_button_link|field_value }}" class="but_download"> {{ content.field_block_2_button_text|field_value }}</a></p>
-					</div>
+					{% if node.field_block_2_button_link.value %}
+          	<br />
+          <p><a href="{{ content.field_block_2_button_link|field_value }}" class="but_download"> {{ content.field_block_2_button_text|field_value }}</a></p>
+          {% endif %}
+          </div>
 				</div>
 				
 			</div>
@@ -41,9 +45,11 @@
 					</div>
 					<div class="pricing-text-list">
             {{ content.field_block_3 }}
-						<br />
-					<p><a href="{{ content.field_block_3_button_link|field_value }}" class="but_download"> {{ content.field_block_3_button_text|field_value }}</a></p>
-					</div>
+						{% if node.field_block_3_button_link.value %}
+            <br />
+            <p><a href="{{ content.field_block_3_button_link|field_value }}" class="but_download"> {{ content.field_block_3_button_text|field_value }}</a></p>
+            {% endif %}
+          </div>
 				</div>
 				
 			</div>
