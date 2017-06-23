@@ -10,6 +10,9 @@ gwsph_institutes:
     js/js/scrolltotop/totop.js: {}
     js/js/animations/js/animations.min.js: {}
     js/tinynav.js: {}
+    js/js/masterslider/jquery.easing.min.js: {}
+    js/js/masterslider/masterslider.min.js: {}
+    
   css:
     theme:
       # Custom CSS file to be loaded in all media circumstances
@@ -25,9 +28,12 @@ gwsph_institutes:
       js/js/accordion/accordion.css: {}
       style/css/font-awesome/css/font-awesome.min.css: {}
       style/css/gwsph_institutes.css: {}
+      js/js/masterslider/style.css: {}
+      js/js/masterslider/style/masterslider.css: {}
+      js/js/masterslider/skins/default/style.css: {}
   dependencies:
 #     - core/modernizr
-#     - core/jquery
+     - core/jquery
 #     - core/drupal
 #     - core/drupalSettings
 
