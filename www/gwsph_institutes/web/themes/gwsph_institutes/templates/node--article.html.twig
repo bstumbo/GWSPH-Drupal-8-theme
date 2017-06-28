@@ -29,7 +29,10 @@
                   <h3>{{ content.field_sub_header }}</h3>
                  {% endif %} 
                       <ul class="post_meta_links">
-                          <li><a href="#" class="date">{{ date }}</a></li>
+                          <li>{% if node.field_news_outlet.value %}
+                            <strong>{{content.field_news_outlet}}</strong> -
+                          {% endif %}<a href="#" class="date">
+                           {{ date }}</a></li>
                           <li class="post_by"><i>By:</i> {{ author_name }}</li>
                       </ul>
                    <div class="clearfix"></div>
