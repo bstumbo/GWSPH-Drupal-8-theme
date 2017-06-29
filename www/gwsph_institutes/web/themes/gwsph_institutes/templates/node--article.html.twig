@@ -30,7 +30,7 @@
                  {% endif %} 
                       <ul class="post_meta_links">
                           <li>{% if node.field_news_outlet.value %}
-                            <strong>{{content.field_news_outlet}}</strong> -
+                            <strong>{{content.field_news_outlet|field_value}} -</strong>
                           {% endif %}<a href="#" class="date">
                            {{ date }}</a></li>
                           <li class="post_by"><i>By:</i> {{ author_name }}</li>
