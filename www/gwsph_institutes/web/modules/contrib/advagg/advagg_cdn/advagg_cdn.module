@@ -2,8 +2,15 @@
 
 /**
  * @file
- * Advanced aggregates cdn module.
+ * Advanced aggregation js cdn module.
  */
+
+/**
+ * Implements hook_advagg_current_hooks_hash_array_alter().
+ */
+function advagg_cdn_minify_advagg_current_hooks_hash_array_alter(&$aggregate_settings) {
+  $aggregate_settings['variables']['advagg_cdn'] = \Drupal::config('advagg_cdn.settings')->get();
+}
 
 /**
  * Implements hook_js_alter().
@@ -193,7 +200,6 @@ function advagg_cdn_js_alter(&$javascript) {
         $javascript[$name]['data'] = $values[$cdn];
         $javascript[$name]['type'] = $values['type'];
       }
-
       // Ensure full jQuery.ui is loaded if required since it is merged on CDN.
       if ($values['require'] == 'window.jQuery.ui' && !isset($javascript['core/assets/vendor/jquery.ui/ui/core-min.js'])) {
         $javascript['core/assets/vendor/jquery.ui/ui/core-min.js'] = [

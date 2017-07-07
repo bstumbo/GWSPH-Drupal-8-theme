@@ -44,9 +44,6 @@ advagg_mod.settings:
     js_preprocess:
       type: boolean
       label: 'Default value to turn on preprocessing for all JavaScript files.'
-    js_remove_console_log:
-      type: boolean
-      label: 'Remove console.log() calls from JavaScript files.'
     prefetch:
       type: boolean
       label: 'Default value to use the prefetch tag for certain domains.'

@@ -32,13 +32,3 @@ function advagg_cdn_requirements($phase) {
 
   return $requirements;
 }
-
-/**
- * Implements hook_install().
- *
- * Clear some caches.
- */
-function advagg_cdn_minify_install() {
-  \Drupal::cache('render')->invalidateAll();
-  \Drupal::cache('advagg')->invalidateAll();
-}

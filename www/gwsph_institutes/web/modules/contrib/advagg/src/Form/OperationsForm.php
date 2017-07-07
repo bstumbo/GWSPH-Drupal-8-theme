@@ -2,14 +2,14 @@
 
 namespace Drupal\advagg\Form;
 
+use Drupal\Core\Asset\AssetCollectionOptimizerInterface;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\PrivateKey;
+use Drupal\Core\State\StateInterface;
 use Drupal\Component\Utility\Crypt;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,6 +26,20 @@ class OperationsForm extends ConfigFormBase {
   protected $privateKey;
 
   /**
+   * The CSS asset collection optimizer service.
+   *
+   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
+   */
+  protected $cssCollectionOptimizer;
+
+  /**
+   * The JavaScript asset collection optimizer service.
+   *
+   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
+   */
+  protected $jsCollectionOptimizer;
+
+  /**
    * The date formatter service.
    *
    * @var \Drupal\Core\Datetime\DateFormatterInterface
@@ -33,18 +47,18 @@ class OperationsForm extends ConfigFormBase {
   protected $dateFormatter;
 
   /**
-   * The AdvAgg cache.
+   * A state information store for the AdvAgg generated aggregates.
    *
-   * @var \Drupal\Core\Cache\CacheBackendInterface
+   * @var \Drupal\Core\State\StateInterface
    */
-  protected $cache;
+  protected $advaggAggregates;
 
   /**
-   * The File System service.
+   * A state information store for the AdvAgg scanned files.
    *
-   * @var \Drupal\Core\File\FileSystemInterface
+   * @var \Drupal\Core\State\StateInterface
    */
-  protected $fileSystem;
+  protected $advaggFiles;
 
   /**
    * Constructs the OperationsForm object.
@@ -55,17 +69,23 @@ class OperationsForm extends ConfigFormBase {
    *   The private key service.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The Date formatter service.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The AdvAgg cache.
-   * @param \Drupal\Core\File\FileSystemInterface $file_system
-   *   The File System service.
+   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $css_collection_optimizer
+   *   The CSS asset collection optimizer service.
+   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $js_collection_optimizer
+   *   The JavaScript asset collection optimizer service.
+   * @param \Drupal\Core\State\StateInterface $advagg_files
+   *   A state information store for the AdvAgg scanned files.
+   * @param \Drupal\Core\State\StateInterface $advagg_aggregates
+   *   A state information store for the AdvAgg generated aggregates.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, PrivateKey $private_key, DateFormatterInterface $date_formatter, CacheBackendInterface $cache, FileSystemInterface $file_system) {
+  public function __construct(ConfigFactoryInterface $config_factory, PrivateKey $private_key, DateFormatterInterface $date_formatter, AssetCollectionOptimizerInterface $css_collection_optimizer, AssetCollectionOptimizerInterface $js_collection_optimizer, StateInterface $advagg_files, StateInterface $advagg_aggregates) {
     parent::__construct($config_factory);
     $this->privateKey = $private_key;
     $this->dateFormatter = $date_formatter;
-    $this->cache = $cache;
-    $this->fileSystem = $file_system;
+    $this->cssCollectionOptimizer = $css_collection_optimizer;
+    $this->jsCollectionOptimizer = $js_collection_optimizer;
+    $this->advaggFiles = $advagg_files;
+    $this->advaggAggregates = $advagg_aggregates;
   }
 
   /**
@@ -76,8 +96,10 @@ class OperationsForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('private_key'),
       $container->get('date.formatter'),
-      $container->get('cache.advagg'),
-      $container->get('file_system')
+      $container->get('asset.css.collection_optimizer'),
+      $container->get('asset.js.collection_optimizer'),
+      $container->get('state.advagg.files'),
+      $container->get('state.advagg.aggregates')
     );
   }
 
@@ -99,37 +121,55 @@ class OperationsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $form = [];
     // Explain what can be done on this page.
     $form['tip'] = [
-      '#markup' => '<p>' . t('This is a collection of commands to control the cache and to manage testing of this module. In general this page is useful when troubleshooting some aggregation issues. For normal operations, you do not need to do anything on this page below the Smart Cache Flush. There are no configuration options here.') . '</p>',
+      '#markup' => '<p>' . $this->t('This is a collection of commands to control the cache and to manage testing of this module. In general this page is useful when troubleshooting some aggregation issues. For normal operations, you do not need to do anything on this page below the Smart Cache Flush. There are no configuration options here.') . '</p>',
     ];
     $form['wrapper'] = [
       '#prefix' => "<div id='operations-wrapper'>",
       '#suffix' => "</div>",
     ];
 
+    // Buttons to do stuff.
+    // AdvAgg smart cache flushing.
+    $form['smart_flush'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Smart Cache Flush'),
+      '#description' => $this->t('Scan all files referenced in aggregated files. If any of them have changed, clear that cache so the changes will go out.'),
+    ];
+    $form['smart_flush']['advagg_flush'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Flush AdvAgg Cache'),
+      '#submit' => ['::flushCache'],
+      '#ajax' => [
+        'callback' => '::tasksAjax',
+        'wrapper' => 'operations-wrapper',
+      ],
+    ];
+
     // Set/Remove Bypass Cookie.
     $form['bypass'] = [
       '#type' => 'fieldset',
-      '#title' => t('Aggregation Bypass Cookie'),
-      '#description' => t('This will set or remove a cookie that disables aggregation for a set period of time.'),
+      '#title' => $this->t('Aggregation Bypass Cookie'),
+      '#description' => $this->t('This will set or remove a cookie that disables aggregation for a set period of time.'),
     ];
     $form['bypass']['timespan'] = [
       '#type' => 'select',
       '#title' => 'Bypass length',
       '#options' => [
-        21600 => t('6 hours'),
-        43200 => t('12 hours'),
-        86400 => t('1 day'),
-        172800 => t('2 days'),
-        604800 => t('1 week'),
-        2592000 => t('1 month'),
-        31536000 => t('1 year'),
+        21600 => $this->t('6 hours'),
+        43200 => $this->t('12 hours'),
+        86400 => $this->t('1 day'),
+        172800 => $this->t('2 days'),
+        604800 => $this->t('1 week'),
+        2592000 => $this->t('1 month'),
+        31536000 => $this->t('1 year'),
       ],
     ];
     $form['bypass']['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Toggle The "aggregation bypass cookie" For This Browser'),
+      '#value' => $this->t('Toggle The "aggregation bypass cookie" For This Browser'),
       '#attributes' => [
         'onclick' => 'javascript:return advagg_toggle_cookie()',
       ],
@@ -143,11 +183,10 @@ class OperationsForm extends ConfigFormBase {
 
     // Tasks run by cron.
     $form['cron'] = [
-      '#type' => 'details',
-      '#open' => TRUE,
-      '#title' => t('Cron Maintenance Tasks'),
+      '#type' => 'fieldset',
+      '#title' => $this->t('Cron Maintenance Tasks'),
       'description' => [
-        '#markup' => t('The following operation is ran on cron but you can run it manually here.'),
+        '#markup' => $this->t('The following 3 operations are ran on cron but you can run them manually here.'),
       ],
     ];
     $form['cron']['wrapper'] = [
@@ -155,14 +194,42 @@ class OperationsForm extends ConfigFormBase {
       '#suffix' => "</div>",
     ];
     $form['cron']['smart_file_flush'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Clear Stale Files'),
-      '#description' => t('Scan all files in the css/js optimized directories and remove outdated ones.'),
+      '#type' => 'details',
+      '#title' => $this->t('Clear All Stale Files'),
+      '#description' => $this->t('Remove all stale files. Scan all files in the advagg_css/js directories and remove the ones that have not been accessed in the last 30 days.'),
     ];
     $form['cron']['smart_file_flush']['advagg_flush_stale_files'] = [
       '#type' => 'submit',
-      '#value' => t('Remove All Stale Files'),
+      '#value' => $this->t('Remove All Stale Files'),
       '#submit' => ['::clearStaleAggregates'],
+      '#ajax' => [
+        'callback' => '::cronTasksAjax',
+        'wrapper' => 'cron-wrapper',
+      ],
+    ];
+    $form['cron']['remove_missing_files'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Clear Missing Files From Database'),
+      '#description' => $this->t('Scan for missing files and remove the associated entries from the database.'),
+    ];
+    $form['cron']['remove_missing_files']['advagg_remove_missing_files_from_db'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Clear Missing Files From Database'),
+      '#submit' => ['::clearMissingFiles'],
+      '#ajax' => [
+        'callback' => '::cronTasksAjax',
+        'wrapper' => 'cron-wrapper',
+      ],
+    ];
+    $form['cron']['remove_old_aggregates'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Delete Unused Aggregates From Database'),
+      '#description' => $this->t('Delete aggregates that have not been accessed in the last 6 weeks.'),
+    ];
+    $form['cron']['remove_old_aggregates']['advagg_remove_old_unused_aggregates'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Delete Unused Aggregates From Database'),
+      '#submit' => ['::clearOldUnusedAggregates'],
       '#ajax' => [
         'callback' => '::cronTasksAjax',
         'wrapper' => 'cron-wrapper',
@@ -172,21 +239,35 @@ class OperationsForm extends ConfigFormBase {
     // Hide drastic measures as they should not be done unless really needed.
     $form['drastic_measures'] = [
       '#type' => 'details',
-      '#title' => t('Drastic Measures'),
-      '#description' => t('The options below should normally never need to be done.'),
+      '#title' => $this->t('Drastic Measures'),
+      '#description' => $this->t('The options below should normally never need to be done.'),
     ];
     $form['drastic_measures']['wrapper'] = [
       '#prefix' => "<div id='drastic-measures-wrapper'>",
       '#suffix' => "</div>",
     ];
     $form['drastic_measures']['dumb_cache_flush'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Clear All Caches'),
-      '#description' => t('Remove all entries from the advagg cache and file information stores. Useful if you suspect a cache is not getting cleared.'),
+      '#type' => 'details',
+      '#title' => $this->t('Clear All Caches'),
+      '#description' => $this->t('Remove all entries from the advagg cache and file information stores. Useful if you suspect a cache is not getting cleared.'),
     ];
     $form['drastic_measures']['dumb_cache_flush']['advagg_flush_all_caches'] = [
       '#type' => 'submit',
-      '#value' => t('Clear All Caches & File Information'),
+      '#value' => $this->t('Clear All Caches & File Information'),
+      '#submit' => ['::clearAll'],
+      '#ajax' => [
+        'callback' => '::drasticTasksAjax',
+        'wrapper' => 'drastic-measures-wrapper',
+      ],
+    ];
+    $form['drastic_measures']['dumb_file_flush'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Clear All Files'),
+      '#description' => $this->t('Remove all generated files. Useful if you think some of the generated files got corrupted and thus need to be deleted.'),
+    ];
+    $form['drastic_measures']['dumb_file_flush']['advagg_flush_all_files'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Remove All Generated Files'),
       '#submit' => ['::clearAggregates'],
       '#ajax' => [
         'callback' => '::drasticTasksAjax',
@@ -194,15 +275,15 @@ class OperationsForm extends ConfigFormBase {
       ],
     ];
     $form['drastic_measures']['force_change'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Force new files'),
-      '#description' => t('Force the creation of all new optimized files by incrementing a global counter. Current value of counter: %value. This is useful if a CDN has cached a file incorrectly as it will force new ones to be used even if nothing else has changed.', [
-        '%value' => $this->config('advagg.settings')->get('global_counter'),
+      '#type' => 'details',
+      '#title' => $this->t('Force new aggregates'),
+      '#description' => $this->t('Force the creation of all new aggregates by incrementing a global counter. Current value of counter: %value. This is useful if a CDN has cached an aggregate incorrectly as it will force new ones to be used even if nothing else has changed.', [
+        '%value' => advagg_get_global_counter(),
       ]),
     ];
     $form['drastic_measures']['force_change']['increment_global_counter'] = [
       '#type' => 'submit',
-      '#value' => t('Increment Global Counter'),
+      '#value' => $this->t('Increment Global Counter'),
       '#submit' => ['::incrementCounter'],
       '#ajax' => [
         'callback' => '::drasticTasksAjax',
@@ -213,13 +294,22 @@ class OperationsForm extends ConfigFormBase {
   }
 
   /**
+   * Perform a smart flush.
+   */
+  public function flushCache() {
+    Cache::invalidateTags(['library_info', 'advagg_css', 'advagg_js']);
+
+    if ($this->config('advagg.settings')->get('cache_level') >= 0) {
+      // Display a simple message if not in Development mode.
+      drupal_set_message($this->t('Advagg Caches Cleared'));
+    }
+  }
+
+  /**
    * Report results via Ajax.
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   *
-   * @return array
-   *   The wrapper element.
    */
   public function tasksAjax(array &$form) {
     return $form['wrapper'];
@@ -230,41 +320,50 @@ class OperationsForm extends ConfigFormBase {
    */
   public function clearAggregates() {
     // Clear out the cache.
-    Cache::invalidateTags(['library_info']);
-    $this->cache->invalidateAll();
-    $pub = $this->fileSystem->realpath('public://');
-    $css_count = count(glob($pub . '/css/optimized/*.css'));
-    $js_count = count(glob($pub . '/js/optimized/*.js'));
-    file_unmanaged_delete_recursive('public://js/optimized/');
-    file_unmanaged_delete_recursive('public://css/optimized/');
+    Cache::invalidateTags(['library_info', 'advagg_css', 'advagg_js']);
+
+    $css_files = $this->cssCollectionOptimizer->deleteAllReal();
+    $js_files = $this->jsCollectionOptimizer->deleteAllReal();
 
     // Report back the results.
-    drupal_set_message(t('All AdvAgg optimized files have been deleted. %css_count CSS files and %js_count JS files have been removed.', [
-      '%css_count' => $css_count,
-      '%js_count' => $js_count,
+    drupal_set_message($this->t('All AdvAgg aggregates have been deleted. %css_count CSS files and %js_count JS files have been removed.', [
+      '%css_count' => count($css_files),
+      '%js_count' => count($js_files),
     ]));
+  }
+
+  /**
+   * Clear ALL saved information and aggregates.
+   */
+  public function clearAll() {
+    $this->clearAggregates();
+    $this->advaggAggregates->deleteAll();
+    $this->advaggFiles->deleteAll();
+    drupal_set_message($this->t('All AdvAgg cached information and aggregates deleted.'));
   }
 
   /**
    * Clear out all stale advagg aggregated files.
    */
   public function clearStaleAggregates() {
-    $counts = advagg_cron(TRUE);
+    // Run the command.
+    $css_count = count($this->cssCollectionOptimizer->deleteStale());
+    $js_count = count($this->jsCollectionOptimizer->deleteStale());
 
     // Report back the results.
-    if (!empty($counts['css']) || !empty($counts['js'])) {
-      drupal_set_message(t('All stale aggregates have been deleted. %css_count CSS files and %js_count JS files have been removed.', [
-        '%css_count' => count($counts['css']),
-        '%js_count' => count($counts['js']),
+    if ($css_count || $js_count) {
+      drupal_set_message($this->t('All stale aggregates have been deleted. %css_count CSS files and %js_count JS files have been removed.', [
+        '%css_count' => $css_count,
+        '%js_count' => $js_count,
       ]));
     }
     else {
-      drupal_set_message(t('No stale aggregates found. Nothing was deleted.'));
+      drupal_set_message($this->t('No stale aggregates found. Nothing was deleted.'));
     }
   }
 
   /**
-   * Increment the global counter. Also full cache clear.
+   * Clear out all advagg cache bins and increment the counter.
    */
   public function incrementCounter() {
     // Clear out the cache and delete aggregates.
@@ -275,7 +374,7 @@ class OperationsForm extends ConfigFormBase {
     $this->config('advagg.settings')
       ->set('global_counter', $new_value)
       ->save();
-    drupal_set_message(t('Global counter is now set to %new_value', [
+    drupal_set_message($this->t('Global counter is now set to %new_value', [
       '%new_value' => $new_value,
     ]));
   }
@@ -285,12 +384,25 @@ class OperationsForm extends ConfigFormBase {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   *
-   * @return array
-   *   The wrapper element.
    */
   public function drasticTasksAjax(array &$form) {
     return $form['drastic_measures']['wrapper'];
+  }
+
+  /**
+   * Scan for missing files and remove the associated entries in the database.
+   */
+  public function clearMissingFiles() {
+    $deleted = $this->advaggFiles->clearMissingFiles();
+    $this->advaggAggregates->clearMissingFiles();
+    if (empty($deleted)) {
+      drupal_set_message($this->t('No missing files found or they could not be safely cleared out of the database.'));
+    }
+    else {
+      drupal_set_message($this->t('Some missing files were found and could be safely cleared out of the database. <pre> @raw </pre>', [
+        '@raw' => print_r($deleted, TRUE),
+      ]));
+    }
   }
 
   /**
@@ -298,12 +410,26 @@ class OperationsForm extends ConfigFormBase {
    *
    * @param array $form
    *   An associative array containing the structure of the form.
-   *
-   * @return array
-   *   The wrapper element.
    */
   public function cronTasksAjax(array &$form) {
     return $form['cron']['wrapper'];
+  }
+
+  /**
+   * Delete aggregates that have not been accessed in the last 6 weeks.
+   */
+  public function clearOldUnusedAggregates() {
+    // Remove unused aggregates.
+    $count = count($this->cssCollectionOptimizer->deleteOld());
+    $count += count($this->jsCollectionOptimizer->deleteOld());
+    if (empty($count)) {
+      drupal_set_message($this->t('No old and unused aggregates found. Nothing was deleted.'));
+    }
+    else {
+      drupal_set_message($this->t('Some old and unused aggregates were found. A total of %count database entries were removed.', [
+        '%count' => $count,
+      ]));
+    }
   }
 
   /**
@@ -322,17 +448,16 @@ class OperationsForm extends ConfigFormBase {
     if (!empty($_COOKIE[$cookie_name]) && $_COOKIE[$cookie_name] == $key) {
       setcookie($cookie_name, '', -1, $GLOBALS['base_path'], '.' . $_SERVER['HTTP_HOST']);
       unset($_COOKIE[$cookie_name]);
-      drupal_set_message(t('AdvAgg Bypass Cookie Removed.'));
+      drupal_set_message($this->t('AdvAgg Bypass Cookie Removed.'));
     }
     // If the cookie does not exist then set it.
     else {
       setcookie($cookie_name, $key, REQUEST_TIME + $form_state->getValue('timespan'), $GLOBALS['base_path'], '.' . $_SERVER['HTTP_HOST']);
       $_COOKIE[$cookie_name] = $key;
-      drupal_set_message(t('AdvAgg Bypass Cookie Set for %time.', [
+      drupal_set_message($this->t('AdvAgg Bypass Cookie Set for %time.', [
         '%time' => $this->dateFormatter->formatInterval($form_state->getValue('timespan')),
       ]));
     }
-    $this->clearAggregates();
   }
 
 }

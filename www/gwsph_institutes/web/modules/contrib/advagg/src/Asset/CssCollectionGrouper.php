@@ -5,6 +5,8 @@ namespace Drupal\advagg\Asset;
 use Drupal\Core\Asset\AssetCollectionGrouperInterface;
 use Drupal\Core\Asset\CssCollectionGrouper as CoreCssCollectionGrouper;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\State\StateInterface;
 
 /**
  * Groups CSS assets.
@@ -19,13 +21,34 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
   protected $config;
 
   /**
+   * The AdvAgg file status state information storage service.
+   *
+   * @var \Drupal\Core\State\StateInterface
+   */
+
+  protected $advaggFiles;
+
+  /**
+   * Module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Construct the AssetDumper instance.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   A config factory for retrieving required config objects.
+   * @param \Drupal\Core\State\StateInterface $advagg_files
+   *   The AdvAgg file status state information storage service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
    */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, StateInterface $advagg_files, ModuleHandlerInterface $module_handler) {
     $this->config = $config_factory->get('advagg.settings');
+    $this->advaggFiles = $advagg_files;
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -46,6 +69,11 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
       return parent::group($css_assets);
     }
     $combine_media = $this->config->get('css.combine_media');
+    $ie_limit_selectors = $this->config->get('css.ie.limit_selectors');
+    $ie_selector_limit = $this->config->get('css.ie.selector_limit');
+    if ($ie_limit_selectors) {
+      $file_info = $this->advaggFiles->getMultiple(array_column($css_assets, 'data'));
+    }
     $groups = [];
     // If a group can contain multiple items, we track the information that must
     // be the same for each item in the group, so that when we iterate the next
@@ -55,6 +83,7 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
     // When creating a new group, we pre-increment $i, so by initializing it to
     // -1, the first group will have index 0.
     $i = -1;
+    $selectors = 0;
     foreach ($css_assets as $item) {
       // The browsers for which the CSS item needs to be loaded is part of the
       // information that determines when a new group is needed, but the order
@@ -86,9 +115,37 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
             if (isset($item['inline'])) {
               $group_keys[] = $item['inline'];
             }
+            if ($ie_limit_selectors) {
+              if (isset($file_info[$item['data']]['parts'])) {
+                foreach ($file_info[$item['data']]['parts'] as $part) {
+                  $i++;
+                  $groups[$i] = $item;
+                  unset($groups[$i]['data'], $groups[$i]['weight'], $groups[$i]['basename']);
+                  $groups[$i]['items'] = [0 => $item];
+                  $groups[$i]['items'][0]['data'] = $part['path'];
+                  $selectors = $part['selectors'];
+                }
+              }
+              else {
+                $selectors += $file_info[$item['data']]['linecount'];
+                if ($selectors > $ie_selector_limit) {
+                  $group_keys['break'] = TRUE;
+                }
+              }
+            }
           }
           else {
             $group_keys = FALSE;
+            if ($ie_limit_selectors && $file_info[$item['data']]['linecount'] > $ie_selector_limit) {
+              foreach ($file_info[$item['data']]['parts'] as $part) {
+                $i++;
+                $groups[$i] = $item;
+                unset($groups[$i]['data'], $groups[$i]['weight'], $groups[$i]['basename']);
+                $groups[$i]['items'] = [0 => $item];
+                $groups[$i]['items'][0]['data'] = $part['path'];
+              }
+              continue;
+            }
           }
           break;
 
@@ -100,6 +157,14 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
       // If the group keys don't match the most recent group we're working with,
       // then a new group must be made.
       if ($group_keys !== $current_group_keys) {
+        if ($ie_limit_selectors) {
+          if ($item['type'] == 'file' && $item['preprocess']) {
+            $selectors = $file_info[$item['data']]['linecount'];
+          }
+          else {
+            $selectors = 0;
+          }
+        }
         unset($group_keys['break']);
         $i++;
         // Initialize the new group with the same properties as the first item
@@ -108,7 +173,7 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
         // the group.
         $groups[$i] = $item;
         unset($groups[$i]['data'], $groups[$i]['weight'], $groups[$i]['basename']);
-        if ($combine_media && $item['type'] === 'file' && $item['preprocess']) {
+        if ($combine_media && $item['type'] == 'file' && $item['preprocess']) {
           unset($groups[$i]['media']);
         }
         $groups[$i]['items'] = [];
@@ -118,6 +183,12 @@ class CssCollectionGrouper extends CoreCssCollectionGrouper implements AssetColl
       // Add the item to the current group.
       $groups[$i]['items'][] = $item;
     }
+
+    // Run hook so other modules can modify the data.
+    // Call hook_advagg_asset_grouping_alter().
+    $type = 'css';
+    $this->moduleHandler->alter('advagg_aggregate_grouping', $groups, $type);
+
     return $groups;
   }
 

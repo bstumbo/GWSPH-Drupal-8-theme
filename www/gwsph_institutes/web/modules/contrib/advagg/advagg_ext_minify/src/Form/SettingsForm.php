@@ -2,8 +2,8 @@
 
 namespace Drupal\advagg_ext_minify\Form;
 
+use Drupal\Core\Asset\AssetCollectionOptimizerInterface;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -15,23 +15,34 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class SettingsForm extends ConfigFormBase {
 
   /**
-   * The advagg cache.
+   * The CSS asset collection optimizer service.
    *
-   * @var \Drupal\Core\Cache\CacheBackendInterface
+   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
    */
-  protected $cache;
+  protected $cssCollectionOptimizer;
+
+  /**
+   * The JavaScript asset collection optimizer service.
+   *
+   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
+   */
+  protected $jsCollectionOptimizer;
 
   /**
    * Constructs a SettingsForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The advagg cache.
+   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $css_collection_optimizer
+   *   The CSS asset collection optimizer service.
+   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $js_collection_optimizer
+   *   The JavaScript asset collection optimizer service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, CacheBackendInterface $cache) {
+  public function __construct(ConfigFactoryInterface $config_factory, AssetCollectionOptimizerInterface $css_collection_optimizer, AssetCollectionOptimizerInterface $js_collection_optimizer) {
     parent::__construct($config_factory);
-    $this->cache = $cache;
+
+    $this->cssCollectionOptimizer = $css_collection_optimizer;
+    $this->jsCollectionOptimizer = $js_collection_optimizer;
   }
 
   /**
@@ -40,7 +51,8 @@ class SettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('cache.advagg')
+      $container->get('asset.css.collection_optimizer'),
+      $container->get('asset.js.collection_optimizer')
     );
   }
 
@@ -79,20 +91,21 @@ class SettingsForm extends ConfigFormBase {
    *   The form array to add to.
    * @param array $params
    *   An array where:
-   *     key 0 is the machine name.
-   *     key 1 is the title.
+   *     key 0 is the machine name
+   *     key 1 is the title
+   *     key 2 is the state.
    */
   private function generateForm(array &$form, array $params) {
     $form[$params[0]] = [
       '#type' => 'fieldset',
-      '#title' => $params[1],
+      '#title' => $this->t('@title', ['@title' => $params[1]]),
     ];
     $form[$params[0]]['cmd'] = [
       '#type' => 'fieldset',
-      '#title' => t('Command Line'),
+      '#title' => $this->t('Command Line'),
     ];
 
-    $description = t('{%CWD%} = \Drupal::root(). <br /> {%IN%} = input file. <br /> {%IN_URL_ENC%} = url pointing to the input file that has been url encoded. <br /> {%OUT%} = output file. <br /><br />');
+    $description = $this->t('{%CWD%} = \Drupal::root(). <br /> {%IN%} = input file. <br /> {%IN_URL_ENC%} = url pointing to the input file that has been url encoded. <br /> {%OUT%} = output file. <br /><br />');
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
       $description .= ' ' . $this->t('Example using the <a href="@link1">Microsoft Ajax Minifier</a>. <p><code>@code1</code></p>', [
         '@link1' => 'http://ajaxmin.codeplex.com/',
@@ -130,12 +143,6 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $description,
     ];
 
-    $form[$params[0]]['cmd'][$params[0] . '_enabled'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Enable external @type minification', ['@type' => $params[1]]),
-      '#default_value' => $this->config('advagg_ext_minify.settings')->get($params[0] . '_cmd'),
-    ];
-
   }
 
   /**
@@ -144,15 +151,17 @@ class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('advagg_ext_minify.settings')
       ->set('js_cmd', $form_state->getValue('js_cmd'))
-      ->set('js_enabled', $form_state->getValue('js_enabled'))
       ->set('css_cmd', $form_state->getValue('css_cmd'))
-      ->set('css_enabled', $form_state->getValue('css_enabled'))
       ->save();
     parent::submitForm($form, $form_state);
 
     // Clear relevant caches.
+    $this->cssCollectionOptimizer->deleteAll();
+    $this->jsCollectionOptimizer->deleteAll();
     Cache::invalidateTags([
       'library_info',
+      'advagg_css',
+      'advagg_js',
     ]);
   }
 
