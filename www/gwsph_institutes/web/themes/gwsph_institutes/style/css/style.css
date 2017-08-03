@@ -3575,6 +3575,12 @@ ul.list_empty {
 	background-color: #f9f9f9;
 }
 
+.table-list-diff tr:nth-child(even) {background: #CCC;}
+
+.table-list-diff tr:nth-child(odd) {background: #FFF;}
+
+.table-list-diff td {background-color: transparent !important;}
+
 /* pricing tables */
 .pricing-tables-main {
 	position: relative;
@@ -5857,6 +5863,11 @@ body.toolbar-fixed .toolbar-oriented, .toolbar-oriented .toolbar-bar, .toolbar-o
   background-size: cover !important;
   background-repeat: no-repeat !important;
   height: 100%;
+}
+
+img.img-100 {
+  width: 100%;
+  height: inherit;
 }
 
 /* TinyNav styles */
