@@ -12,6 +12,7 @@ gwsph_institutes:
     js/tinynav.js: {}
     js/js/masterslider/jquery.easing.min.js: {}
     js/js/masterslider/masterslider.min.js: {}
+    js/js/masterslider/masterslider.settings.js: {}
     
   css:
     theme:
