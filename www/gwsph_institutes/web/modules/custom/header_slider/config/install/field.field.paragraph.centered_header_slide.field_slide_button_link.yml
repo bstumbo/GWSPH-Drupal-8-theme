@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slide_button_link
+    - paragraphs.paragraphs_type.centered_header_slide
+  module:
+    - link
+id: paragraph.centered_header_slide.field_slide_button_link
+field_name: field_slide_button_link
+entity_type: paragraph
+bundle: centered_header_slide
+label: 'Slide Button LInk'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
