@@ -7,8 +7,13 @@ dependencies:
   - ds
   - entity_reference_revisions
   - field
+  - image
+  - link
+  - link_attributes
   - menu_ui
   - node
   - paragraphs
   - path
+  - text
   - user
+description: 'Module to enable the Header Slider and its configuration'

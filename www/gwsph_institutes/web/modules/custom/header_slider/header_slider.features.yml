@@ -1,1 +1,6 @@
+excluded:
+  - core.entity_form_display.node.highlevel.default
+  - core.entity_view_display.node.highlevel.default
+  - core.entity_view_display.node.highlevel.teaser
+  - field.field.node.highlevel.field_content_area_1
 required: true
