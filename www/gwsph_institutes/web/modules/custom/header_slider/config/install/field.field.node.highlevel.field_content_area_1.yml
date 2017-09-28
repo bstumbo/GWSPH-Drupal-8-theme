@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_area_1
+    - node.type.full_width_content
+    - node.type.header_slider
+    - node.type.highlevel
+    - node.type.three_block_teaser
+    - node.type.three_image_teaser
+    - node.type.two_column_promotion
+id: node.highlevel.field_content_area_1
+field_name: field_content_area_1
+entity_type: node
+bundle: highlevel
+label: 'Content Area 1'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      full_width_content: full_width_content
+      header_slider: header_slider
+      three_block_teaser: three_block_teaser
+      three_image_teaser: three_image_teaser
+      two_column_promotion: two_column_promotion
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: full_width_content
+field_type: entity_reference

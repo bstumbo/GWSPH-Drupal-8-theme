@@ -1,0 +1,14 @@
+name: 'Header Slider'
+type: module
+core: 8.x
+dependencies:
+  - block_field
+  - classy_paragraphs
+  - ds
+  - entity_reference_revisions
+  - field
+  - menu_ui
+  - node
+  - paragraphs
+  - path
+  - user
