@@ -1,0 +1,19 @@
+name: 'Header Slider'
+description: 'This module enables the Header Slider content type and corresponding configuration'
+type: module
+core: 8.x
+dependencies:
+  - ds
+  - entity_reference_revisions
+  - field
+  - file
+  - image
+  - link
+  - link_attributes
+  - menu_ui
+  - node
+  - paragraphs
+  - path
+  - text
+  - user
+version: 8.x-1.0

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slide_text_area
+    - paragraphs.paragraphs_type.centered_header_slide
+  module:
+    - text
+id: paragraph.centered_header_slide.field_slide_text_area
+field_name: field_slide_text_area
+entity_type: paragraph
+bundle: centered_header_slide
+label: 'Slide Text Area'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: "<h1 class=\"ms-layer stext1\" data-delay=\"800\" data-duration=\"900\" data-ease=\"easeOutExpo\" data-effect=\"bottom(40)\" data-type=\"text\" style=\"top: 335px;\">Placeholder H1<br />\r\n<strong>Continued H1</strong></h1>\r\n\r\n<h4 class=\"ms-layer stext2\" data-delay=\"1500\" data-duration=\"900\" data-ease=\"easeOutExpo\" data-effect=\"bottom(40)\" data-type=\"text\" style=\"top: 470px;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>\r\n"
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

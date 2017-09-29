@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.header_slider.field_sliders
+    - node.type.header_slider
+  module:
+    - ds
+    - entity_reference_revisions
+    - user
+id: node.header_slider.default
+targetEntityType: node
+bundle: header_slider
+mode: default
+content:
+  field_sliders:
+    type: entity_reference_revisions_entity_view
+    weight: 101
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      ds:
+        ds_limit: ''
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
