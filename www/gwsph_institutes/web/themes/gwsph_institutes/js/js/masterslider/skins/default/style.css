@@ -31,13 +31,13 @@
 	height: 40px;
 	cursor: pointer;
 	top: 59%;
-	left: -30px;
+	left: -1px;
 	margin-top: -20px;
 	position: absolute;
 	z-index: 10;
 }
 .ms-skin-default .ms-nav-next {
-	right: -30px;
+	right: -1px;
 	left: auto;
 	background-position: -89px -103px;
 }
